@@ -96,7 +96,7 @@ public interface TransactionDefinition {
 	int PROPAGATION_REQUIRES_NEW = 3;
 
 	/**
-	 * Do not support a current transaction; rather always execute non-transactionally.
+	 * Do not support a current transaction; rather always execute non-transactionally.    不支持当前事务，总是以非事务方式运行
 	 * Analogous to the EJB transaction attribute of the same name.
 	 * <p><b>NOTE:</b> Actual transaction suspension will not work out-of-the-box
 	 * on all transaction managers. This in particular applies to

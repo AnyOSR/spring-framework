@@ -185,6 +185,7 @@ public abstract class TransactionSynchronizationManager {
 		if (oldValue instanceof ResourceHolder && ((ResourceHolder) oldValue).isVoid()) {
 			oldValue = null;
 		}
+		// 对于任意的key，只能绑定一次，再次绑定异常
 		if (oldValue != null) {
 			throw new IllegalStateException("Already value [" + oldValue + "] for key [" +
 					actualKey + "] bound to thread [" + Thread.currentThread().getName() + "]");
@@ -300,21 +301,24 @@ public abstract class TransactionSynchronizationManager {
 	 * @throws IllegalStateException if synchronization is not active
 	 * @see TransactionSynchronization
 	 */
+	// 获取当前线程的事务同步列表
 	public static List<TransactionSynchronization> getSynchronizations() throws IllegalStateException {
 		Set<TransactionSynchronization> synchs = synchronizations.get();
+		// 如果还未设置
 		if (synchs == null) {
 			throw new IllegalStateException("Transaction synchronization is not active");
 		}
 		// Return unmodifiable snapshot, to avoid ConcurrentModificationExceptions
 		// while iterating and invoking synchronization callbacks that in turn
 		// might register further synchronizations.
+        // 如果是空
 		if (synchs.isEmpty()) {
 			return Collections.emptyList();
 		}
 		else {
 			// Sort lazily here, not in registerSynchronization.
 			List<TransactionSynchronization> sortedSynchs = new ArrayList<TransactionSynchronization>(synchs);
-			AnnotationAwareOrderComparator.sort(sortedSynchs);
+			AnnotationAwareOrderComparator.sort(sortedSynchs);           // 按照order排序
 			return Collections.unmodifiableList(sortedSynchs);
 		}
 	}

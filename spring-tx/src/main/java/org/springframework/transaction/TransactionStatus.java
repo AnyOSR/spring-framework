@@ -19,13 +19,13 @@ package org.springframework.transaction;
 import java.io.Flushable;
 
 /**
- * Representation of the status of a transaction.
+ * Representation of the status of a transaction.                         代表事务状态
  *
- * <p>Transactional code can use this to retrieve status information,
- * and to programmatically request a rollback (instead of throwing
+ * <p>Transactional code can use this to retrieve status information,     可以通过这个检索状态信息
+ * and to programmatically request a rollback (instead of throwing        或者编程显示回滚
  * an exception that causes an implicit rollback).
  *
- * <p>Derives from the SavepointManager interface to provide access
+ * <p>Derives from the SavepointManager interface to provide access      继承SavepointManager接口来提供获取保存点设施
  * to savepoint management facilities. Note that savepoint management
  * is only available if supported by the underlying transaction manager.
  *
@@ -39,14 +39,14 @@ import java.io.Flushable;
 public interface TransactionStatus extends SavepointManager, Flushable {
 
 	/**
-	 * Return whether the present transaction is new (else participating
+	 * Return whether the present transaction is new (else participating    返回当前的事务是否是一个新的事务、或者是加入到一个已存在的事务中
 	 * in an existing transaction, or potentially not running in an
 	 * actual transaction in the first place).
 	 */
 	boolean isNewTransaction();
 
 	/**
-	 * Return whether this transaction internally carries a savepoint,
+	 * Return whether this transaction internally carries a savepoint,        返回当前事务是否存在savepoint，也就是说，当前事务是作为一个嵌套的事务(基于savepoint)创建的
 	 * that is, has been created as nested transaction based on a savepoint.
 	 * <p>This method is mainly here for diagnostic purposes, alongside
 	 * {@link #isNewTransaction()}. For programmatic handling of custom

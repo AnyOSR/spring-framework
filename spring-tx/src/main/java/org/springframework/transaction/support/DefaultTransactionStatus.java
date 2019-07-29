@@ -176,8 +176,7 @@ public class DefaultTransactionStatus extends AbstractTransactionStatus {
 	@Override
 	protected SavepointManager getSavepointManager() {
 		if (!isTransactionSavepointManager()) {
-			throw new NestedTransactionNotSupportedException(
-				"Transaction object [" + getTransaction() + "] does not support savepoints");
+			throw new NestedTransactionNotSupportedException("Transaction object [" + getTransaction() + "] does not support savepoints");
 		}
 		return (SavepointManager) getTransaction();
 	}

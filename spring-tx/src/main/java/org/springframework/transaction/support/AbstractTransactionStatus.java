@@ -78,6 +78,7 @@ public abstract class AbstractTransactionStatus implements TransactionStatus {
 	 * <p>Will only return "true" if the application called {@code setRollbackOnly}
 	 * on this TransactionStatus object.
 	 */
+	// 检查TransactionStatus的rollbackOnly标志  local本地
 	public boolean isLocalRollbackOnly() {
 		return this.rollbackOnly;
 	}
@@ -87,6 +88,7 @@ public abstract class AbstractTransactionStatus implements TransactionStatus {
 	 * underlying transaction, if any.
 	 * <p>This implementation always returns {@code false}.
 	 */
+	// 模板方法 决定隐含事务的 全局rollback-only flag
 	public boolean isGlobalRollbackOnly() {
 		return false;
 	}
@@ -148,6 +150,7 @@ public abstract class AbstractTransactionStatus implements TransactionStatus {
 	 * Roll back to the savepoint that is held for the transaction
 	 * and release the savepoint right afterwards.
 	 */
+	// 回滚到savepoint
 	public void rollbackToHeldSavepoint() throws TransactionException {
 		if (!hasSavepoint()) {
 			throw new TransactionUsageException(
@@ -161,6 +164,7 @@ public abstract class AbstractTransactionStatus implements TransactionStatus {
 	/**
 	 * Release the savepoint that is held for the transaction.
 	 */
+	// 释放当前的savepoint
 	public void releaseHeldSavepoint() throws TransactionException {
 		if (!hasSavepoint()) {
 			throw new TransactionUsageException(
