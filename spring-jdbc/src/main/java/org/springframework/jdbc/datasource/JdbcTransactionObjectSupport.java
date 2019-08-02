@@ -104,8 +104,7 @@ public abstract class JdbcTransactionObjectSupport implements SavepointManager, 
 		ConnectionHolder conHolder = getConnectionHolderForSavepoint();
 		try {
 			if (!conHolder.supportsSavepoints()) {
-				throw new NestedTransactionNotSupportedException(
-						"Cannot create a nested transaction because savepoints are not supported by your JDBC driver");
+				throw new NestedTransactionNotSupportedException("Cannot create a nested transaction because savepoints are not supported by your JDBC driver");
 			}
 			return conHolder.createSavepoint();
 		}
@@ -144,14 +143,13 @@ public abstract class JdbcTransactionObjectSupport implements SavepointManager, 
 		}
 	}
 
+	// 校验并返回ConnectionHolder
 	protected ConnectionHolder getConnectionHolderForSavepoint() throws TransactionException {
 		if (!isSavepointAllowed()) {
-			throw new NestedTransactionNotSupportedException(
-					"Transaction manager does not allow nested transactions");
+			throw new NestedTransactionNotSupportedException("Transaction manager does not allow nested transactions");
 		}
 		if (!hasConnectionHolder()) {
-			throw new TransactionUsageException(
-					"Cannot create nested transaction if not exposing a JDBC transaction");
+			throw new TransactionUsageException("Cannot create nested transaction if not exposing a JDBC transaction");
 		}
 		return getConnectionHolder();
 	}

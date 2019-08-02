@@ -34,16 +34,16 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  * implementation for a single JDBC {@link javax.sql.DataSource}. This class is
  * capable of working in any environment with any JDBC driver, as long as the setup
  * uses a {@code javax.sql.DataSource} as its {@code Connection} factory mechanism.
- * Binds a JDBC Connection from the specified DataSource to the current thread,
+ * Binds a JDBC Connection from the specified DataSource to the current thread,    从特定的DataSource获取一个connection绑定到当前线程
  * potentially allowing for one thread-bound Connection per DataSource.
  *
- * <p><b>Note: The DataSource that this transaction manager operates on needs
+ * <p><b>Note: The DataSource that this transaction manager operates on needs      这个事务管理器操作的DataSource 必须返回独立的connection
  * to return independent Connections.</b> The Connections may come from a pool
- * (the typical case), but the DataSource must not return thread-scoped /
- * request-scoped Connections or the like. This transaction manager will
+ * (the typical case), but the DataSource must not return thread-scoped /       这个DataSource不能返回线程范围或者请求范围的connection
+ * request-scoped Connections or the like. This transaction manager will        线程管理器会关联connection和线程绑定的事务本身，
  * associate Connections with thread-bound transactions itself, according
- * to the specified propagation behavior. It assumes that a separate,
- * independent Connection can be obtained even during an ongoing transaction.
+ * to the specified propagation behavior. It assumes that a separate,            根据给定的传播行为
+ * independent Connection can be obtained even during an ongoing transaction.    假定，一个分离的独立的connection能被获取，即使是在一个正在进行的事务中
  *
  * <p>Application code is required to retrieve the JDBC Connection via
  * {@link DataSourceUtils#getConnection(DataSource)} instead of a standard

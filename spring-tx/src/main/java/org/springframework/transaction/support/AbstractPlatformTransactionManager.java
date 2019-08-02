@@ -872,19 +872,20 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 		try {
 			try {
 				triggerBeforeCompletion(status);
+				// 如果有savepoint
 				if (status.hasSavepoint()) {
 					if (status.isDebug()) {
 						logger.debug("Rolling back transaction to savepoint");
 					}
 					status.rollbackToHeldSavepoint();
 				}
-				else if (status.isNewTransaction()) {
+				else if (status.isNewTransaction()) {   // 没有savepoint 是新事务
 					if (status.isDebug()) {
 						logger.debug("Initiating transaction rollback");
 					}
 					doRollback(status);
 				}
-				else if (status.hasTransaction()) {
+				else if (status.hasTransaction()) {    // 没有savepoint 不是新事务 有transaction存在 (则是参与事务)
 					if (status.isLocalRollbackOnly() || isGlobalRollbackOnParticipationFailure()) {
 						if (status.isDebug()) {
 							logger.debug("Participating transaction failed - marking existing transaction as rollback-only");
@@ -931,7 +932,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 				}
 				doRollback(status);
 			}
-			else if (status.hasTransaction() && isGlobalRollbackOnParticipationFailure()) {
+			else if (status.hasTransaction() && isGlobalRollbackOnParticipationFailure()) {  // 参与事务
 				if (status.isDebug()) {
 					logger.debug("Marking existing transaction as rollback-only after commit exception", ex);
 				}
@@ -1007,7 +1008,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 				// invoke the afterCompletion callbacks immediately
 				invokeAfterCompletion(synchronizations, completionStatus);
 			}
-			else if (!synchronizations.isEmpty()) {
+			else if (!synchronizations.isEmpty()) {   // 参与事务
 				// Existing transaction that we participate in, controlled outside
 				// of the scope of this Spring transaction manager -> try to register
 				// an afterCompletion callback with the existing (JTA) transaction.

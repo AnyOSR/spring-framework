@@ -137,7 +137,7 @@ public abstract class ResourceHolderSupport implements ResourceHolder {
 	 */
 	private void checkTransactionTimeout(boolean deadlineReached) throws TransactionTimedOutException {
 		if (deadlineReached) {
-			setRollbackOnly();
+			setRollbackOnly();   // 超时后设置为rollbackOnly
 			throw new TransactionTimedOutException("Transaction timed out: deadline was " + this.deadline);
 		}
 	}
@@ -183,6 +183,7 @@ public abstract class ResourceHolderSupport implements ResourceHolder {
 		this.referenceCount = 0;
 	}
 
+	// 只能用一次？ 没有改为false的地方
 	@Override
 	public void unbound() {
 		this.isVoid = true;
