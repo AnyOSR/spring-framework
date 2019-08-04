@@ -96,6 +96,7 @@ public abstract class DataSourceUtils {
 	public static Connection doGetConnection(DataSource dataSource) throws SQLException {
 		Assert.notNull(dataSource, "No DataSource specified");
 
+		//从当前线程threadLocal中获取dataSource对应的ConnectionHolder
 		ConnectionHolder conHolder = (ConnectionHolder) TransactionSynchronizationManager.getResource(dataSource);
 		if (conHolder != null && (conHolder.hasConnection() || conHolder.isSynchronizedWithTransaction())) {
 			conHolder.requested();
@@ -110,6 +111,7 @@ public abstract class DataSourceUtils {
 		logger.debug("Fetching JDBC Connection from DataSource");
 		Connection con = dataSource.getConnection();
 
+		// 如果 事务同步开启
 		if (TransactionSynchronizationManager.isSynchronizationActive()) {
 			logger.debug("Registering transaction synchronization for JDBC Connection");
 			// Use same Connection for further JDBC actions within the transaction.
@@ -122,9 +124,9 @@ public abstract class DataSourceUtils {
 				holderToUse.setConnection(con);
 			}
 			holderToUse.requested();
-			TransactionSynchronizationManager.registerSynchronization(
-					new ConnectionSynchronization(holderToUse, dataSource));
+			TransactionSynchronizationManager.registerSynchronization(new ConnectionSynchronization(holderToUse, dataSource));
 			holderToUse.setSynchronizedWithTransaction(true);
+			// 如果holderToUse是新建的
 			if (holderToUse != conHolder) {
 				TransactionSynchronizationManager.bindResource(dataSource, holderToUse);
 			}
@@ -320,6 +322,7 @@ public abstract class DataSourceUtils {
 			ConnectionHolder conHolder = (ConnectionHolder) TransactionSynchronizationManager.getResource(dataSource);
 			if (conHolder != null && connectionEquals(conHolder, con)) {
 				// It's the transactional Connection: Don't close it.
+				// 减引用计数
 				conHolder.released();
 				return;
 			}
@@ -336,6 +339,8 @@ public abstract class DataSourceUtils {
 	 * @see Connection#close()
 	 * @see SmartDataSource#shouldClose(Connection)
 	 */
+	// 关闭Connection，如果dataSource不是SmartDataSource
+	// 或者dataSource是SmartDataSource，且可以关闭了
 	public static void doCloseConnection(Connection con, DataSource dataSource) throws SQLException {
 		if (!(dataSource instanceof SmartDataSource) || ((SmartDataSource) dataSource).shouldClose(con)) {
 			con.close();
@@ -409,7 +414,7 @@ public abstract class DataSourceUtils {
 
 		private final DataSource dataSource;
 
-		private int order;
+		private int order;     // 代理类所处的层次
 
 		private boolean holderActive = true;
 
@@ -453,6 +458,7 @@ public abstract class DataSourceUtils {
 			// that has its own cleanup via transaction synchronization),
 			// to avoid issues with strict JTA implementations that expect
 			// the close call before transaction completion.
+			// 如果已经没被引用
 			if (!this.connectionHolder.isOpen()) {
 				TransactionSynchronizationManager.unbindResource(this.dataSource);
 				this.holderActive = false;

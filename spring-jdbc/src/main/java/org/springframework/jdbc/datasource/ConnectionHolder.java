@@ -189,6 +189,7 @@ public class ConnectionHolder extends ResourceHolderSupport {
 	@Override
 	public void released() {
 		super.released();
+		// 如果已经没被引用，则释放
 		if (!isOpen() && this.currentConnection != null) {
 			this.connectionHandle.releaseConnection(this.currentConnection);
 			this.currentConnection = null;

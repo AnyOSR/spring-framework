@@ -46,7 +46,7 @@ public abstract class ResourceHolderSupport implements ResourceHolder {
 
 
 	/**
-	 * Mark the resource as synchronized with a transaction.
+	 * Mark the resource as synchronized with a transaction.    这个资源已经被某个事物锁定？
 	 */
 	public void setSynchronizedWithTransaction(boolean synchronizedWithTransaction) {
 		this.synchronizedWithTransaction = synchronizedWithTransaction;
