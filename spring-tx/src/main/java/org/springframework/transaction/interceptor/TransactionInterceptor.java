@@ -30,7 +30,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.transaction.PlatformTransactionManager;
 
 /**
- * AOP Alliance MethodInterceptor for declarative transaction
+ * AOP Alliance MethodInterceptor for declarative transaction                事务 aop
  * management using the common Spring transaction infrastructure
  * ({@link org.springframework.transaction.PlatformTransactionManager}).
  *

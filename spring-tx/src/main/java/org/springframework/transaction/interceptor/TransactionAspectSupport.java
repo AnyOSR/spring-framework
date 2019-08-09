@@ -278,7 +278,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			try {
 				// This is an around advice: Invoke the next interceptor in the chain.
 				// This will normally result in a target object being invoked.
-				retVal = invocation.proceedWithInvocation();
+				retVal = invocation.proceedWithInvocation();     // 具体的service方法调用
 			}
 			catch (Throwable ex) {
 				// target invocation exception
@@ -286,7 +286,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 				throw ex;
 			}
 			finally {
-				cleanupTransactionInfo(txInfo);
+				cleanupTransactionInfo(txInfo);     // 恢复上一层事务状态
 			}
 			commitTransactionAfterReturning(txInfo);
 			return retVal;
@@ -424,7 +424,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 		TransactionStatus status = null;
 		if (txAttr != null) {
 			if (tm != null) {
-				status = tm.getTransaction(txAttr);
+				status = tm.getTransaction(txAttr);    // 事务管理器获取transactionStatus
 			}
 			else {
 				if (logger.isDebugEnabled()) {
@@ -564,6 +564,8 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 
 		private TransactionStatus transactionStatus;
 
+		// 一个事务的不同service层创建的TransactionInfo形成了一个链表，每一个TransactionInfo都有一个从事务管理器获取的TransactionStatus
+		// 将这个信息写入了transactionInfoHolder(threadLocal)
 		private TransactionInfo oldTransactionInfo;
 
 		public TransactionInfo(PlatformTransactionManager transactionManager,
@@ -613,6 +615,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			transactionInfoHolder.set(this);
 		}
 
+		// 恢复到上一层service的事务status
 		private void restoreThreadLocalStatus() {
 			// Use stack to restore old transaction TransactionInfo.
 			// Will be null if none was set.
