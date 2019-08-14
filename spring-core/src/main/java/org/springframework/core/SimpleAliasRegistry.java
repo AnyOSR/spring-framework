@@ -135,7 +135,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	 * factory, applying the given StringValueResolver to them.
 	 * <p>The value resolver may for example resolve placeholders
 	 * in target bean names and even in alias names.
-	 * @param valueResolver the StringValueResolver to apply
+	 * @param valueResolver the StringValueResolver to apply   placeHolder替换
 	 */
 	public void resolveAliases(StringValueResolver valueResolver) {
 		Assert.notNull(valueResolver, "StringValueResolver must not be null");
@@ -148,6 +148,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 				if (resolvedAlias == null || resolvedName == null || resolvedAlias.equals(resolvedName)) {
 					this.aliasMap.remove(alias);
 				}
+				// resolvedAlias != null && resolvedName != null && !resolvedAlias.equals(resolvedName) &&!resolvedAlias.equals(alias)
 				else if (!resolvedAlias.equals(alias)) {
 					String existingName = this.aliasMap.get(resolvedAlias);
 					if (existingName != null) {
