@@ -38,6 +38,8 @@ import org.springframework.util.StringValueResolver;
 public class SimpleAliasRegistry implements AliasRegistry {
 
 	/** Map from alias to canonical name */
+	// alias-b b-c c-name
+	// alias name
 	private final Map<String, String> aliasMap = new ConcurrentHashMap<String, String>(16);
 
 
@@ -81,9 +83,9 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	 */
 	public boolean hasAlias(String name, String alias) {
 		for (Map.Entry<String, String> entry : this.aliasMap.entrySet()) {
-			String registeredName = entry.getValue();
+			String registeredName = entry.getValue();     // value是name
 			if (registeredName.equals(name)) {
-				String registeredAlias = entry.getKey();
+				String registeredAlias = entry.getKey();  // key是alias
 				return (registeredAlias.equals(alias) || hasAlias(registeredAlias, alias));
 			}
 		}

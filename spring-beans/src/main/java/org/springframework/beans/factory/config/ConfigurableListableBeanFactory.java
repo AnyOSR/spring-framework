@@ -63,7 +63,7 @@ public interface ConfigurableListableBeanFactory
 
 	/**
 	 * Register a special dependency type with corresponding autowired value.
-	 * <p>This is intended for factory/context references that are supposed
+	 * <p>This is intended for factory/context references that are supposed           需要被注入 但是本身不是bean
 	 * to be autowirable but are not defined as beans in the factory:
 	 * e.g. a dependency of type ApplicationContext resolved to the
 	 * ApplicationContext instance that the bean is living in.
