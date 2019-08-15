@@ -174,11 +174,10 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 
 		// Do not accept a null value for a FactoryBean that's not fully
 		// initialized yet: Many FactoryBeans just return null then.
-
-		// 如果返回null 且 beanName正在创建中
 		if (object == null && isSingletonCurrentlyInCreation(beanName)) {
 			throw new BeanCurrentlyInCreationException(beanName, "FactoryBean which is currently in creation returned null from getObject");
 		}
+		// 如果返回的不是null 或者 beanName没有在创建中
 		return object;
 	}
 
