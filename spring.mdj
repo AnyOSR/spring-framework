@@ -3987,6 +3987,23 @@
 										},
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsklbnzmQK4LE=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMMZX8="
+											},
+											"model": {
+												"$ref": "AAAAAAFsklbnjGQHsKE="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 545,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAFskImzUGO4v9I=",
 											"_parent": {
 												"$ref": "AAAAAAFskHxSUWMMZX8="
@@ -3996,7 +4013,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 545,
+											"top": 560,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+singletonsCurrentlyInCreation: Set<String>",
@@ -4013,7 +4030,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 560,
+											"top": 575,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+inCreationCheckExclusions: Set<String>",
@@ -4030,7 +4047,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 575,
+											"top": 590,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+disposableBeans: Map<String, Object>",
@@ -4047,7 +4064,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 590,
+											"top": 605,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+containedBeanMap: Map<String, Set<String>>",
@@ -4064,7 +4081,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 605,
+											"top": 620,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+dependentBeanMap: Map<String, Set<String>>",
@@ -4081,7 +4098,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 620,
+											"top": 635,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+dependenciesForBeanMap: Map<String, Set<String>>",
@@ -4092,7 +4109,7 @@
 									"left": 1600,
 									"top": 465,
 									"width": 492.3203125,
-									"height": 173
+									"height": 188
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -4115,7 +4132,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 643,
+											"top": 658,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+void addSingleton(String beanName, Object singletonObject)()",
@@ -4132,7 +4149,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 658,
+											"top": 673,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+void addSingletonFactory(String beanName, ObjectFactory<?> singletonFactory)()",
@@ -4149,7 +4166,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1605,
-											"top": 673,
+											"top": 688,
 											"width": 482.3203125,
 											"height": 13,
 											"text": "+Object getSingleton(String beanName, boolean allowEarlyReference)()",
@@ -4158,7 +4175,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1600,
-									"top": 638,
+									"top": 653,
 									"width": 492.3203125,
 									"height": 53
 								},
@@ -4200,7 +4217,7 @@
 							"left": 1600,
 							"top": 440,
 							"width": 492.3203125,
-							"height": 251,
+							"height": 266,
 							"nameCompartment": {
 								"$ref": "AAAAAAFskHxSUGMHwis="
 							},
@@ -5270,6 +5287,14 @@
 							},
 							"name": "registeredSingletons",
 							"type": "Set<String>"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsklbnjGQHsKE=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",

@@ -101,4 +101,14 @@ public class DefaultSingletonBeanRegistryTests {
 		assertTrue(beanRegistry.isDependent("c", "c"));
 	}
 
+	@Test
+	public void testDependentRegistration1() {
+		DefaultSingletonBeanRegistry beanRegistry = new DefaultSingletonBeanRegistry();
+
+		beanRegistry.registerDependentBean("a", "b");
+		beanRegistry.registerDependentBean("b", "a");
+
+		assertTrue(beanRegistry.isDependent("a", "e"));
+	}
+
 }
