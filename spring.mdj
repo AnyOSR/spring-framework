@@ -4171,13 +4171,115 @@
 											"height": 13,
 											"text": "+Object getSingleton(String beanName, boolean allowEarlyReference)()",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbRGIYWDTJM=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMNEoo="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbRF44WAN9A="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 703,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+boolean isCurrentlyInCreation(String beanName)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbSgk4WK3po=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMNEoo="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbSgU4WHk8Y="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 718,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+void beforeSingletonCreation(String beanName)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbTW04WRbVI=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMNEoo="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbTWk4WOmLY="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 733,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+void registerDisposableBean(String beanName, DisposableBean bean)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbUdvIWYF6M=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMNEoo="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbUde4WVlho="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 748,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+boolean isDependent(String beanName, String dependentBeanName)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbWCq4Wfcw0=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMNEoo="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbWCa4Wc10s="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 763,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+void destroyBean(String beanName, DisposableBean bean)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbXZaoWmxMM=",
+											"_parent": {
+												"$ref": "AAAAAAFskHxSUWMNEoo="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbXZK4WjRF8="
+											},
+											"font": "Arial;13;0",
+											"left": 1605,
+											"top": 778,
+											"width": 482.3203125,
+											"height": 13,
+											"text": "+Object getSingletonMutex()()",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1600,
 									"top": 653,
 									"width": 492.3203125,
-									"height": 53
+									"height": 143
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -4217,7 +4319,7 @@
 							"left": 1600,
 							"top": 440,
 							"width": 492.3203125,
-							"height": 266,
+							"height": 356,
 							"nameCompartment": {
 								"$ref": "AAAAAAFskHxSUGMHwis="
 							},
@@ -4256,7 +4358,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1449,
-									"top": 481,
+									"top": 529,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -4277,7 +4379,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 1434,
-									"top": 481,
+									"top": 529,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -4298,7 +4400,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1479,
-									"top": 482,
+									"top": 530,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -4315,7 +4417,7 @@
 							"tail": {
 								"$ref": "AAAAAAFskHxSUGMG86U="
 							},
-							"points": "1600:488;1464:488;1464:179",
+							"points": "1600:536;1464:536;1464:179",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFskIAqXWMyVhA="
@@ -4418,6 +4520,347 @@
 							},
 							"propertyLabel": {
 								"$ref": "AAAAAAFskIB0hGNZBnQ="
+							}
+						},
+						{
+							"_type": "UMLClassView",
+							"_id": "AAAAAAFslbcJJoWy16s=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"model": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAFslbcJJ4WzZt8=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcJJoWy16s="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcJJoWwMtc="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFslbcJJ4W0lXQ=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4WzZt8="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": -480,
+											"top": -112,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFslbcJJ4W1W1A=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4WzZt8="
+											},
+											"font": "Arial;13;3",
+											"left": 1525,
+											"top": 847,
+											"width": 640.31982421875,
+											"height": 13,
+											"text": "FactoryBeanRegistrySupport"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFslbcJJ4W2FOg=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4WzZt8="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": -480,
+											"top": -112,
+											"width": 73.67724609375,
+											"height": 13,
+											"text": "(from Model)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFslbcJJ4W3a6s=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4WzZt8="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": -480,
+											"top": -112,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 1520,
+									"top": 840,
+									"width": 650.31982421875,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAFslbcJJ4W0lXQ="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAFslbcJJ4W1W1A="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAFslbcJJ4W2FOg="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAFslbcJJ4W3a6s="
+									}
+								},
+								{
+									"_type": "UMLAttributeCompartmentView",
+									"_id": "AAAAAAFslbcJJ4W427k=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcJJoWy16s="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcJJoWwMtc="
+									},
+									"subViews": [
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFslbhe/IX99xM=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4W427k="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbhevIX6xzo="
+											},
+											"font": "Arial;13;0",
+											"left": 1525,
+											"top": 870,
+											"width": 640.31982421875,
+											"height": 13,
+											"text": "+factoryBeanObjectCache: final Map<String, Object>",
+											"horizontalAlignment": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 1520,
+									"top": 865,
+									"width": 650.31982421875,
+									"height": 23
+								},
+								{
+									"_type": "UMLOperationCompartmentView",
+									"_id": "AAAAAAFslbcJJ4W5jCE=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcJJoWy16s="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcJJoWwMtc="
+									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbj5eIYOzsc=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4W5jCE="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbj5NIYLbaU="
+											},
+											"font": "Arial;13;0",
+											"left": 1525,
+											"top": 893,
+											"width": 640.31982421875,
+											"height": 13,
+											"text": "+Class<?> getTypeForFactoryBean(final FactoryBean<?> factoryBean)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslbnPNYYcpG4=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4W5jCE="
+											},
+											"model": {
+												"$ref": "AAAAAAFslbnO84YZavw="
+											},
+											"font": "Arial;13;0",
+											"left": 1525,
+											"top": 908,
+											"width": 640.31982421875,
+											"height": 13,
+											"text": "+Object getCachedObjectForFactoryBean(String beanName)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFslboilYYjrRY=",
+											"_parent": {
+												"$ref": "AAAAAAFslbcJJ4W5jCE="
+											},
+											"model": {
+												"$ref": "AAAAAAFslboiU4YgOns="
+											},
+											"font": "Arial;13;0",
+											"left": 1525,
+											"top": 923,
+											"width": 640.31982421875,
+											"height": 13,
+											"text": "+Object getObjectFromFactoryBean(FactoryBean<?> factory, String beanName, boolean shouldPostProcess)()",
+											"horizontalAlignment": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 1520,
+									"top": 888,
+									"width": 650.31982421875,
+									"height": 53
+								},
+								{
+									"_type": "UMLReceptionCompartmentView",
+									"_id": "AAAAAAFslbcJJ4W6kGc=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcJJoWy16s="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcJJoWwMtc="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"left": -240,
+									"top": -56,
+									"width": 10,
+									"height": 10
+								},
+								{
+									"_type": "UMLTemplateParameterCompartmentView",
+									"_id": "AAAAAAFslbcJJ4W705g=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcJJoWy16s="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcJJoWwMtc="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"left": -240,
+									"top": -56,
+									"width": 10,
+									"height": 10
+								}
+							],
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 1520,
+							"top": 840,
+							"width": 650.31982421875,
+							"height": 101,
+							"nameCompartment": {
+								"$ref": "AAAAAAFslbcJJ4WzZt8="
+							},
+							"attributeCompartment": {
+								"$ref": "AAAAAAFslbcJJ4W427k="
+							},
+							"operationCompartment": {
+								"$ref": "AAAAAAFslbcJJ4W5jCE="
+							},
+							"receptionCompartment": {
+								"$ref": "AAAAAAFslbcJJ4W6kGc="
+							},
+							"templateParameterCompartment": {
+								"$ref": "AAAAAAFslbcJJ4W705g="
+							}
+						},
+						{
+							"_type": "UMLGeneralizationView",
+							"_id": "AAAAAAFslbcY0oXcNh4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"model": {
+								"$ref": "AAAAAAFslbcY0oXaT4Y="
+							},
+							"subViews": [
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFslbcY0oXdXDw=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcY0oXcNh4="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcY0oXaT4Y="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"left": 1825,
+									"top": 810,
+									"height": 13,
+									"alpha": 1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAFslbcY0oXcNh4="
+									},
+									"edgePosition": 1
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFslbcY0oXeTp0=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcY0oXcNh4="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcY0oXaT4Y="
+									},
+									"visible": null,
+									"font": "Arial;13;0",
+									"left": 1810,
+									"top": 810,
+									"height": 13,
+									"alpha": 1.5707963267948966,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFslbcY0oXcNh4="
+									},
+									"edgePosition": 1
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFslbcY0oXfYe4=",
+									"_parent": {
+										"$ref": "AAAAAAFslbcY0oXcNh4="
+									},
+									"model": {
+										"$ref": "AAAAAAFslbcY0oXaT4Y="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"left": 1854,
+									"top": 811,
+									"height": 13,
+									"alpha": -1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAFslbcY0oXcNh4="
+									},
+									"edgePosition": 1
+								}
+							],
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAFskHxSUGMG86U="
+							},
+							"tail": {
+								"$ref": "AAAAAAFslbcJJoWy16s="
+							},
+							"points": "1840:840;1840:795",
+							"showVisibility": true,
+							"nameLabel": {
+								"$ref": "AAAAAAFslbcY0oXdXDw="
+							},
+							"stereotypeLabel": {
+								"$ref": "AAAAAAFslbcY0oXeTp0="
+							},
+							"propertyLabel": {
+								"$ref": "AAAAAAFslbcY0oXfYe4="
 							}
 						}
 					]
@@ -5375,8 +5818,117 @@
 								"$ref": "AAAAAAFskHxSUGMEbm0="
 							},
 							"name": "Object getSingleton(String beanName, boolean allowEarlyReference)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbRF44WAN9A=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"name": "boolean isCurrentlyInCreation(String beanName)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbSgU4WHk8Y=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"name": "void beforeSingletonCreation(String beanName)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbTWk4WOmLY=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"name": "void registerDisposableBean(String beanName, DisposableBean bean)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbUde4WVlho=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"name": "boolean isDependent(String beanName, String dependentBeanName)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbWCa4Wc10s=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"name": "void destroyBean(String beanName, DisposableBean bean)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbXZK4WjRF8=",
+							"_parent": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							},
+							"name": "Object getSingletonMutex()"
 						}
 					]
+				},
+				{
+					"_type": "UMLClass",
+					"_id": "AAAAAAFslbcJJoWwMtc=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "FactoryBeanRegistrySupport",
+					"ownedElements": [
+						{
+							"_type": "UMLGeneralization",
+							"_id": "AAAAAAFslbcY0oXaT4Y=",
+							"_parent": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"source": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"target": {
+								"$ref": "AAAAAAFskHxSUGMEbm0="
+							}
+						}
+					],
+					"attributes": [
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFslbhevIX6xzo=",
+							"_parent": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"name": "factoryBeanObjectCache",
+							"type": "final Map<String, Object>"
+						}
+					],
+					"operations": [
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbj5NIYLbaU=",
+							"_parent": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"name": "Class<?> getTypeForFactoryBean(final FactoryBean<?> factoryBean)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslbnO84YZavw=",
+							"_parent": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"name": "Object getCachedObjectForFactoryBean(String beanName)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFslboiU4YgOns=",
+							"_parent": {
+								"$ref": "AAAAAAFslbcJJoWwMtc="
+							},
+							"name": "Object getObjectFromFactoryBean(FactoryBean<?> factory, String beanName, boolean shouldPostProcess)"
+						}
+					],
+					"isAbstract": true
 				}
 			]
 		}

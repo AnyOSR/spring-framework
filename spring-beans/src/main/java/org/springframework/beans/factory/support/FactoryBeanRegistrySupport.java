@@ -68,8 +68,7 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 		}
 		catch (Throwable ex) {
 			// Thrown from the FactoryBean's getObjectType implementation.
-			logger.warn("FactoryBean threw exception from getObjectType, despite the contract saying " +
-					"that it should return null if the type of its object cannot be determined yet", ex);
+			logger.warn("FactoryBean threw exception from getObjectType, despite the contract saying " + "that it should return null if the type of its object cannot be determined yet", ex);
 			return null;
 		}
 	}
@@ -113,8 +112,7 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 								object = postProcessObjectFromFactoryBean(object, beanName);
 							}
 							catch (Throwable ex) {
-								throw new BeanCreationException(beanName,
-										"Post-processing of FactoryBean's singleton object failed", ex);
+								throw new BeanCreationException(beanName, "Post-processing of FactoryBean's singleton object failed", ex);
 							}
 						}
 						this.factoryBeanObjectCache.put(beanName, (object != null ? object : NULL_OBJECT));
@@ -145,8 +143,7 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 	 * @throws BeanCreationException if FactoryBean object creation failed
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
-	private Object doGetObjectFromFactoryBean(final FactoryBean<?> factory, final String beanName)
-			throws BeanCreationException {
+	private Object doGetObjectFromFactoryBean(final FactoryBean<?> factory, final String beanName) throws BeanCreationException {
 
 		Object object;
 		try {
@@ -177,9 +174,10 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 
 		// Do not accept a null value for a FactoryBean that's not fully
 		// initialized yet: Many FactoryBeans just return null then.
+
+		// 如果返回null 且 beanName正在创建中
 		if (object == null && isSingletonCurrentlyInCreation(beanName)) {
-			throw new BeanCurrentlyInCreationException(
-					beanName, "FactoryBean which is currently in creation returned null from getObject");
+			throw new BeanCurrentlyInCreationException(beanName, "FactoryBean which is currently in creation returned null from getObject");
 		}
 		return object;
 	}
@@ -205,10 +203,10 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 	 * @return the bean instance as FactoryBean
 	 * @throws BeansException if the given bean cannot be exposed as a FactoryBean
 	 */
+	// 强制类型转换为FactoryBean
 	protected FactoryBean<?> getFactoryBean(String beanName, Object beanInstance) throws BeansException {
 		if (!(beanInstance instanceof FactoryBean)) {
-			throw new BeanCreationException(beanName,
-					"Bean instance of type [" + beanInstance.getClass() + "] is not a FactoryBean");
+			throw new BeanCreationException(beanName, "Bean instance of type [" + beanInstance.getClass() + "] is not a FactoryBean");
 		}
 		return (FactoryBean<?>) beanInstance;
 	}
