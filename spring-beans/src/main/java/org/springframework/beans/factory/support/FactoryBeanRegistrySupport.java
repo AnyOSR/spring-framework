@@ -115,6 +115,8 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 								throw new BeanCreationException(beanName, "Post-processing of FactoryBean's singleton object failed", ex);
 							}
 						}
+						// put到factoryBeanObjectCache中的bean是 factoryBean.getObject()的
+						// 单例且 singletonObjects里面含有
 						this.factoryBeanObjectCache.put(beanName, (object != null ? object : NULL_OBJECT));
 					}
 				}
