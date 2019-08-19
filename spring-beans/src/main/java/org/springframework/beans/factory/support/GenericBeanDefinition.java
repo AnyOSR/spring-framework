@@ -24,9 +24,9 @@ import org.springframework.beans.factory.config.BeanDefinition;
  * constructor argument values and property values. Additionally, deriving from a
  * parent bean definition can be flexibly configured through the "parentName" property.
  *
- * <p>In general, use this {@code GenericBeanDefinition} class for the purpose of
+ * <p>In general, use this {@code GenericBeanDefinition} class for the purpose of             一般来讲 通过这个类来注册用户可见的bean定义(post-processor 重新配置parent name)
  * registering user-visible bean definitions (which a post-processor might operate on,
- * potentially even reconfiguring the parent name). Use {@code RootBeanDefinition} /
+ * potentially even reconfiguring the parent name). Use {@code RootBeanDefinition} /         利用RootBeanDefinition/ChildBeanDefinition
  * {@code ChildBeanDefinition} where parent/child relationships happen to be pre-determined.
  *
  * @author Juergen Hoeller

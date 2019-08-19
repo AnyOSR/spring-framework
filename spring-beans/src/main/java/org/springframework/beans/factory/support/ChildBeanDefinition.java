@@ -21,14 +21,14 @@ import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.util.ObjectUtils;
 
 /**
- * Bean definition for beans which inherit settings from their parent.
- * Child bean definitions have a fixed dependency on a parent bean definition.
+ * Bean definition for beans which inherit settings from their parent.                // 从他们的parent 继承配置 的bean
+ * Child bean definitions have a fixed dependency on a parent bean definition.        // Child bean definition 有一个固定的parent bean定义依赖
  *
- * <p>A child bean definition will inherit constructor argument values,
+ * <p>A child bean definition will inherit constructor argument values,           继承 构造函数参数 property值 方法
  * property values and method overrides from the parent, with the option
  * to add new values. If init method, destroy method and/or static factory
  * method are specified, they will override the corresponding parent settings.
- * The remaining settings will <i>always</i> be taken from the child definition:
+ * The remaining settings will <i>always</i> be taken from the child definition:   剩下的配置总是取的child的定义
  * depends on, autowire mode, dependency check, singleton, lazy init.
  *
  * <p><b>NOTE:</b> Since Spring 2.5, the preferred way to register bean
