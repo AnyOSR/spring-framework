@@ -5085,6 +5085,23 @@
 										},
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsl5EFb4cffKE=",
+											"_parent": {
+												"$ref": "AAAAAAFsl4sKN4ZLODk="
+											},
+											"model": {
+												"$ref": "AAAAAAFsl5EFL4cc2R4="
+											},
+											"font": "Arial;13;0",
+											"left": 1101,
+											"top": 1137,
+											"width": 653.57373046875,
+											"height": 13,
+											"text": "+typeConverter: TypeConverter",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAFsl5C73ocRYA8=",
 											"_parent": {
 												"$ref": "AAAAAAFsl4sKN4ZLODk="
@@ -5094,7 +5111,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1101,
-											"top": 1137,
+											"top": 1152,
 											"width": 653.57373046875,
 											"height": 13,
 											"text": "+conversionService: ConversionService",
@@ -5111,27 +5128,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1101,
-											"top": 1152,
-											"width": 653.57373046875,
-											"height": 13,
-											"text": "+propertyEditorRegistrars: Set<PropertyEditorRegistrar>",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFsl5EFb4cffKE=",
-											"_parent": {
-												"$ref": "AAAAAAFsl4sKN4ZLODk="
-											},
-											"model": {
-												"$ref": "AAAAAAFsl5EFL4cc2R4="
-											},
-											"font": "Arial;13;0",
-											"left": 1101,
 											"top": 1167,
 											"width": 653.57373046875,
 											"height": 13,
-											"text": "+typeConverter: TypeConverter",
+											"text": "+propertyEditorRegistrars: Set<PropertyEditorRegistrar>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6770,6 +6770,15 @@
 						},
 						{
 							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsl5EFL4cc2R4=",
+							"_parent": {
+								"$ref": "AAAAAAFsl4sKNoZDUdw="
+							},
+							"name": "typeConverter",
+							"type": "TypeConverter"
+						},
+						{
+							"_type": "UMLAttribute",
 							"_id": "AAAAAAFsl5C7l4cOXe4=",
 							"_parent": {
 								"$ref": "AAAAAAFsl4sKNoZDUdw="
@@ -6785,15 +6794,6 @@
 							},
 							"name": "propertyEditorRegistrars",
 							"type": "Set<PropertyEditorRegistrar>"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFsl5EFL4cc2R4=",
-							"_parent": {
-								"$ref": "AAAAAAFsl4sKNoZDUdw="
-							},
-							"name": "typeConverter",
-							"type": "TypeConverter"
 						},
 						{
 							"_type": "UMLAttribute",
