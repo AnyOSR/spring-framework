@@ -547,8 +547,7 @@ public class MethodParameter {
 			return new MethodParameter((Constructor<?>) methodOrConstructor, parameterIndex);
 		}
 		else {
-			throw new IllegalArgumentException(
-					"Given object [" + methodOrConstructor + "] is neither a Method nor a Constructor");
+			throw new IllegalArgumentException("Given object [" + methodOrConstructor + "] is neither a Method nor a Constructor");
 		}
 	}
 

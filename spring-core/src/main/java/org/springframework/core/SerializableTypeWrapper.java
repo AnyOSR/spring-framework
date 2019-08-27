@@ -145,6 +145,7 @@ abstract class SerializableTypeWrapper {
 	/**
 	 * Return a {@link Serializable} {@link Type} backed by a {@link TypeProvider} .
 	 */
+	// 返回一个实现了Serializable Type SerializableTypeProxy接口的动态代理类
 	static Type forTypeProvider(final TypeProvider provider) {
 		Assert.notNull(provider, "Provider must not be null");
 		if (provider.getType() instanceof Serializable || provider.getType() == null) {
@@ -157,8 +158,11 @@ abstract class SerializableTypeWrapper {
 		for (Class<?> type : SUPPORTED_SERIALIZABLE_TYPES) {
 			if (type.isAssignableFrom(provider.getType().getClass())) {
 				ClassLoader classLoader = provider.getClass().getClassLoader();
+				// Serializable接口 SerializableTypeProxy接口 type接口
 				Class<?>[] interfaces = new Class<?>[] {type, SerializableTypeProxy.class, Serializable.class};
+				// 创建invocationHandler
 				InvocationHandler handler = new TypeProxyInvocationHandler(provider);
+				// 创建代理类
 				cached = (Type) Proxy.newProxyInstance(classLoader, interfaces, handler);
 				cache.put(provider.getType(), cached);
 				return cached;
@@ -241,9 +245,11 @@ abstract class SerializableTypeWrapper {
 				return this.provider;
 			}
 
+			// 如果返回是Type且没有参数
 			if (Type.class == method.getReturnType() && args == null) {
 				return forTypeProvider(new MethodInvokeTypeProvider(this.provider, method, -1));
 			}
+			// 如果返回是Type数组 且没有参数
 			else if (Type[].class == method.getReturnType() && args == null) {
 				Type[] result = new Type[((Type[]) method.invoke(this.provider.getType(), args)).length];
 				for (int i = 0; i < result.length; i++) {
@@ -252,6 +258,7 @@ abstract class SerializableTypeWrapper {
 				return result;
 			}
 
+			// 否则
 			try {
 				return method.invoke(this.provider.getType(), args);
 			}

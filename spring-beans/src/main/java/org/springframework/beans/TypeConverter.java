@@ -67,8 +67,7 @@ public interface TypeConverter {
 	 * @see org.springframework.core.convert.ConversionService
 	 * @see org.springframework.core.convert.converter.Converter
 	 */
-	<T> T convertIfNecessary(Object value, Class<T> requiredType, MethodParameter methodParam)
-			throws TypeMismatchException;
+	<T> T convertIfNecessary(Object value, Class<T> requiredType, MethodParameter methodParam) throws TypeMismatchException;
 
 	/**
 	 * Convert the value to the required type (if necessary from a String).
@@ -86,7 +85,6 @@ public interface TypeConverter {
 	 * @see org.springframework.core.convert.ConversionService
 	 * @see org.springframework.core.convert.converter.Converter
 	 */
-	<T> T convertIfNecessary(Object value, Class<T> requiredType, Field field)
-			throws TypeMismatchException;
+	<T> T convertIfNecessary(Object value, Class<T> requiredType, Field field) throws TypeMismatchException;
 
 }

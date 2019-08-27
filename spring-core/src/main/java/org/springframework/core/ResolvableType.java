@@ -158,8 +158,7 @@ public class ResolvableType implements Serializable {
 	 * Private constructor used to create a new {@link ResolvableType} for uncached purposes,
 	 * with upfront resolution but lazily calculated hash.
 	 */
-	private ResolvableType(
-			Type type, TypeProvider typeProvider, VariableResolver variableResolver, ResolvableType componentType) {
+	private ResolvableType(Type type, TypeProvider typeProvider, VariableResolver variableResolver, ResolvableType componentType) {
 
 		this.type = type;
 		this.typeProvider = typeProvider;
@@ -197,13 +196,15 @@ public class ResolvableType implements Serializable {
 	 * otherwise {@code null}.
 	 */
 	public Class<?> getRawClass() {
-		if (this.type == this.resolved) {
+		if (this.type == this.resolved) {              // 如果相等 则为class
 			return this.resolved;
 		}
 		Type rawType = this.type;
+		// 如果是参数化类型 获取rawType
 		if (rawType instanceof ParameterizedType) {
 			rawType = ((ParameterizedType) rawType).getRawType();
 		}
+		// 如果是class，则返回，否则返回null
 		return (rawType instanceof Class ? (Class<?>) rawType : null);
 	}
 
@@ -215,7 +216,7 @@ public class ResolvableType implements Serializable {
 	 * type information or meta-data that alternative JVM languages may provide.
 	 */
 	public Object getSource() {
-		Object source = (this.typeProvider != null ? this.typeProvider.getSource() : null);
+		Object source = (this.typeProvider != null ? this.typeProvider.getSource() : null);   // 首先尝试从typeProvider获取 不为null则从type获取
 		return (source != null ? source : this.type);
 	}
 
@@ -1409,8 +1410,7 @@ public class ResolvableType implements Serializable {
 		@Override
 		public ResolvableType resolveVariable(TypeVariable<?> variable) {
 			for (int i = 0; i < this.variables.length; i++) {
-				if (SerializableTypeWrapper.unwrap(this.variables[i]).equals(
-						SerializableTypeWrapper.unwrap(variable))) {
+				if (SerializableTypeWrapper.unwrap(this.variables[i]).equals(SerializableTypeWrapper.unwrap(variable))) {
 					return this.generics[i];
 				}
 			}
@@ -1471,7 +1471,7 @@ public class ResolvableType implements Serializable {
 
 
 	/**
-	 * Internal helper to handle bounds from {@link WildcardType}s.
+	 * Internal helper to handle bounds from {@link WildcardType}s.  通配符
 	 */
 	private static class WildcardBounds {
 

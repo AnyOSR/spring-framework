@@ -307,7 +307,7 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 				this.customEditors = new LinkedHashMap<Class<?>, PropertyEditor>(16);
 			}
 			this.customEditors.put(requiredType, propertyEditor);
-			this.customEditorCache = null;
+			this.customEditorCache = null;                          // 清掉缓存
 		}
 	}
 
@@ -414,7 +414,7 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 						editor = this.customEditors.get(key);
 						// Cache editor for search type, to avoid the overhead
 						// of repeated assignable-from checks.
-						if (this.customEditorCache == null) {
+						if (this.customEditorCache == null) {     // 构造缓存
 							this.customEditorCache = new HashMap<Class<?>, PropertyEditor>();
 						}
 						this.customEditorCache.put(requiredType, editor);
@@ -457,8 +457,7 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	 * will be copied. If this is null, all editors will be copied.
 	 */
 	protected void copyCustomEditorsTo(PropertyEditorRegistry target, String nestedProperty) {
-		String actualPropertyName =
-				(nestedProperty != null ? PropertyAccessorUtils.getPropertyName(nestedProperty) : null);
+		String actualPropertyName = (nestedProperty != null ? PropertyAccessorUtils.getPropertyName(nestedProperty) : null);
 		if (this.customEditors != null) {
 			for (Map.Entry<Class<?>, PropertyEditor> entry : this.customEditors.entrySet()) {
 				target.registerCustomEditor(entry.getKey(), entry.getValue());
@@ -496,11 +495,11 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	 * @param propertyPath the property path to check for keys/indexes to strip
 	 */
 	private void addStrippedPropertyPaths(List<String> strippedPaths, String nestedPath, String propertyPath) {
-		int startIndex = propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR);
+		int startIndex = propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR);     //  [的位置
 		if (startIndex != -1) {
-			int endIndex = propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR);
+			int endIndex = propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR);   // ]的位置
 			if (endIndex != -1) {
-				String prefix = propertyPath.substring(0, startIndex);
+				String prefix = propertyPath.substring(0, startIndex);              // prefix[key]suffix
 				String key = propertyPath.substring(startIndex, endIndex + 1);
 				String suffix = propertyPath.substring(endIndex + 1, propertyPath.length());
 				// Strip the first key.
@@ -545,11 +544,8 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 			// (If not registered for Collection or array, it is assumed to be intended
 			// for elements.)
 			if (this.registeredType == null ||
-					(requiredType != null &&
-					(ClassUtils.isAssignable(this.registeredType, requiredType) ||
-					ClassUtils.isAssignable(requiredType, this.registeredType))) ||
-					(requiredType == null &&
-					(!Collection.class.isAssignableFrom(this.registeredType) && !this.registeredType.isArray()))) {
+					(requiredType != null && (ClassUtils.isAssignable(this.registeredType, requiredType) || ClassUtils.isAssignable(requiredType, this.registeredType))) ||
+					(requiredType == null && (!Collection.class.isAssignableFrom(this.registeredType) && !this.registeredType.isArray()))) {
 				return this.propertyEditor;
 			}
 			else {

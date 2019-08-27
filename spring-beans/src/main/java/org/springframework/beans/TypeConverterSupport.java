@@ -34,28 +34,24 @@ public abstract class TypeConverterSupport extends PropertyEditorRegistrySupport
 
 	TypeConverterDelegate typeConverterDelegate;
 
-
 	@Override
 	public <T> T convertIfNecessary(Object value, Class<T> requiredType) throws TypeMismatchException {
 		return doConvert(value, requiredType, null, null);
 	}
 
 	@Override
-	public <T> T convertIfNecessary(Object value, Class<T> requiredType, MethodParameter methodParam)
-			throws TypeMismatchException {
+	public <T> T convertIfNecessary(Object value, Class<T> requiredType, MethodParameter methodParam) throws TypeMismatchException {
 
 		return doConvert(value, requiredType, methodParam, null);
 	}
 
 	@Override
-	public <T> T convertIfNecessary(Object value, Class<T> requiredType, Field field)
-			throws TypeMismatchException {
+	public <T> T convertIfNecessary(Object value, Class<T> requiredType, Field field) throws TypeMismatchException {
 
 		return doConvert(value, requiredType, null, field);
 	}
 
-	private <T> T doConvert(Object value, Class<T> requiredType, MethodParameter methodParam, Field field)
-			throws TypeMismatchException {
+	private <T> T doConvert(Object value, Class<T> requiredType, MethodParameter methodParam, Field field) throws TypeMismatchException {
 		try {
 			if (field != null) {
 				return this.typeConverterDelegate.convertIfNecessary(value, requiredType, field);
