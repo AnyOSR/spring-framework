@@ -744,7 +744,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 			processRollback(defStatus);
 			return;
 		}
-		// 如果标记为GlobalRollbackOnly，且不commit，则回滚
+		// 如果标记为GlobalRollbackOnly，且在GlobalRollbackOnly发生时不commit，则回滚
 		if (!shouldCommitOnGlobalRollbackOnly() && defStatus.isGlobalRollbackOnly()) {
 			if (defStatus.isDebug()) {
 				logger.debug("Global transaction is marked as rollback-only but transactional code requested commit");
@@ -886,6 +886,9 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 					doRollback(status);
 				}
 				else if (status.hasTransaction()) {    // 没有savepoint 不是新事务 有transaction存在 (则是参与事务)
+
+					// 参与事务被标记为rollBackOnly或者globalRollbackOnParticipationFailure开关开启时,给当前事务标记需要回滚
+					// 如果参与事务没有被标记为rollback ，则看globalRollbackOnParticipationFailure开关
 					if (status.isLocalRollbackOnly() || isGlobalRollbackOnParticipationFailure()) {
 						if (status.isDebug()) {
 							logger.debug("Participating transaction failed - marking existing transaction as rollback-only");
