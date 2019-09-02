@@ -78,6 +78,11 @@ import org.springframework.util.StringUtils;
  * @see #forInstance(Object)
  * @see ResolvableTypeProvider
  */
+
+// ParameterizedType  参数化类型 即泛型  List<T>
+// TypeVariable       类型变量 T
+// GenericArrayType   泛型数组 T[]    它的component type要么是泛型，要么是类型变量
+// WildcardType       通配符 ?
 @SuppressWarnings("serial")
 public class ResolvableType implements Serializable {
 
@@ -200,7 +205,7 @@ public class ResolvableType implements Serializable {
 			return this.resolved;
 		}
 		Type rawType = this.type;
-		// 如果是参数化类型 获取rawType
+		// 如果是参数化类型(泛型) 获取rawType
 		if (rawType instanceof ParameterizedType) {
 			rawType = ((ParameterizedType) rawType).getRawType();
 		}
@@ -274,6 +279,7 @@ public class ResolvableType implements Serializable {
 		}
 
 		// Deal with wildcard bounds
+        // 通配符类型
 		WildcardBounds ourBounds = WildcardBounds.get(this);
 		WildcardBounds typeBounds = WildcardBounds.get(other);
 
@@ -1526,12 +1532,14 @@ public class ResolvableType implements Serializable {
 
 		/**
 		 * Get a {@link WildcardBounds} instance for the specified type, returning
-		 * {@code null} if the specified type cannot be resolved to a {@link WildcardType}.
+		 * {@code null} if the specified type cannot be resolved to a {@link WildcardType}.  通配符类型
 		 * @param type the source type
 		 * @return a {@link WildcardBounds} instance or {@code null}
 		 */
 		public static WildcardBounds get(ResolvableType type) {
 			ResolvableType resolveToWildcard = type;
+
+			// 一直到resolveToWildcard.getType() instanceof WildcardType
 			while (!(resolveToWildcard.getType() instanceof WildcardType)) {
 				if (resolveToWildcard == NONE) {
 					return null;
