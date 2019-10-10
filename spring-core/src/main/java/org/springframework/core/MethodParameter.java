@@ -89,7 +89,7 @@ public class MethodParameter {
 	 * return type; 0 for the first method parameter; 1 for the second method
 	 * parameter, etc.
 	 * @param nestingLevel the nesting level of the target type
-	 * (typically 1; e.g. in case of a List of Lists, 1 would indicate the
+	 * (typically 1; e.g. in case of a List of Lists, 1 would indicate the   列表的列表  1嵌套列表 2嵌套列表元素
 	 * nested List, whereas 2 would indicate the element of the nested List)
 	 */
 	public MethodParameter(Method method, int parameterIndex, int nestingLevel) {
