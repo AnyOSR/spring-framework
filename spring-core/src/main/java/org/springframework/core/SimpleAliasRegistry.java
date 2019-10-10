@@ -40,6 +40,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	/** Map from alias to canonical name */
 	// alias-b b-c c-name
 	// alias name
+	// 一个name可能有多个alias alias为key name为value 不可能有两个一样的alias
 	private final Map<String, String> aliasMap = new ConcurrentHashMap<String, String>(16);
 
 
@@ -77,9 +78,9 @@ public class SimpleAliasRegistry implements AliasRegistry {
 
 	/**
 	 * Determine whether the given name has the given alias registered.
-	 * @param name the name to check
-	 * @param alias the alias to look for
-	 * @since 4.2.1
+	 * @param name the name to check                 alias2 - name!!!
+	 * @param alias the alias to look for            alias1 - alias2
+	 * @since 4.2.1                                !!!alias - alias1
 	 */
 	public boolean hasAlias(String name, String alias) {
 		for (Map.Entry<String, String> entry : this.aliasMap.entrySet()) {
@@ -120,12 +121,13 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	 * @param result the resulting aliases list
 	 */
 	private void retrieveAliases(String name, List<String> result) {
+		// 遍历能直接找到的
 		for (Map.Entry<String, String> entry : this.aliasMap.entrySet()) {
 			String registeredName = entry.getValue();
 			if (registeredName.equals(name)) {
 				String alias = entry.getKey();
 				result.add(alias);
-				retrieveAliases(alias, result);
+				retrieveAliases(alias, result); // 递归间接找到的
 			}
 		}
 	}
@@ -141,18 +143,20 @@ public class SimpleAliasRegistry implements AliasRegistry {
 		Assert.notNull(valueResolver, "StringValueResolver must not be null");
 		synchronized (this.aliasMap) {
 			Map<String, String> aliasCopy = new HashMap<String, String>(this.aliasMap);
-			for (String alias : aliasCopy.keySet()) {
-				String registeredName = aliasCopy.get(alias);
-				String resolvedAlias = valueResolver.resolveStringValue(alias);
-				String resolvedName = valueResolver.resolveStringValue(registeredName);
-				if (resolvedAlias == null || resolvedName == null || resolvedAlias.equals(resolvedName)) {
+			for (String alias : aliasCopy.keySet()) {                                     // 注册的原生alias   placeholder
+				String registeredName = aliasCopy.get(alias);                             // 注册的原生name    placeholder
+				String resolvedAlias = valueResolver.resolveStringValue(alias);           // 解析得到的alias
+				String resolvedName = valueResolver.resolveStringValue(registeredName);   // 解析得到的name
+				if (resolvedAlias == null || resolvedName == null || resolvedAlias.equals(resolvedName)) {   // 如果解析的alias和name一样，则一定去除
 					this.aliasMap.remove(alias);
 				}
+
 				// resolvedAlias != null && resolvedName != null && !resolvedAlias.equals(resolvedName) &&!resolvedAlias.equals(alias)
+				// 如果解析的alias和name不一样 则可能加入
 				else if (!resolvedAlias.equals(alias)) {
 					String existingName = this.aliasMap.get(resolvedAlias);
-					if (existingName != null) {
-						if (existingName.equals(resolvedName)) {
+					if (existingName != null) {   // 对应resolvedAlias 的resolvedName已经存在 之前已经被解析过
+						if (existingName.equals(resolvedName)) {   // 如果一致
 							// Pointing to existing alias - just remove placeholder
 							this.aliasMap.remove(alias);
 							break;
@@ -163,11 +167,12 @@ public class SimpleAliasRegistry implements AliasRegistry {
 								registeredName + "'.");
 					}
 					checkForAliasCircle(resolvedName, resolvedAlias);
-					this.aliasMap.remove(alias);
-					this.aliasMap.put(resolvedAlias, resolvedName);
+					this.aliasMap.remove(alias);                                 // 去除占位符
+					this.aliasMap.put(resolvedAlias, resolvedName);              // 加入解析的alias-name
 				}
+				// resolvedAlias != null && resolvedName != null && !resolvedAlias.equals(resolvedName) && resolvedAlias.equals(alias)
 				else if (!registeredName.equals(resolvedName)) {
-					this.aliasMap.put(alias, resolvedName);
+					this.aliasMap.put(alias, resolvedName);              // alias一致 直接更新
 				}
 			}
 		}
