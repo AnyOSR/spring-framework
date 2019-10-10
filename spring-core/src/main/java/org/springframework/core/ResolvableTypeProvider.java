@@ -27,7 +27,7 @@ package org.springframework.core;
  * possible to return {@code null} to fallback on a default behaviour.
  *
  * @author Stephane Nicoll
- * @since 4.2
+ * @since 4.2TypeProxyInvocationHandler
  */
 public interface ResolvableTypeProvider {
 

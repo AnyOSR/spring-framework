@@ -353,11 +353,13 @@ abstract class SerializableTypeWrapper {
 		private void readObject(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
 			inputStream.defaultReadObject();
 			try {
+				// 可能是方法
 				if (this.methodName != null) {
 					this.methodParameter = new MethodParameter(
 							this.declaringClass.getDeclaredMethod(this.methodName, this.parameterTypes), this.parameterIndex);
 				}
 				else {
+				// 可能是构造函数
 					this.methodParameter = new MethodParameter(
 							this.declaringClass.getDeclaredConstructor(this.parameterTypes), this.parameterIndex);
 				}
