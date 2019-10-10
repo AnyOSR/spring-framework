@@ -47,8 +47,8 @@ import org.springframework.util.Assert;
  */
 public class MethodParameter {
 
+	//两者不共存
 	private final Method method;
-
 	private final Constructor<?> constructor;
 
 	private final int parameterIndex;
@@ -74,7 +74,7 @@ public class MethodParameter {
 	/**
 	 * Create a new {@code MethodParameter} for the given method, with nesting level 1.
 	 * @param method the Method to specify a parameter for
-	 * @param parameterIndex the index of the parameter: -1 for the method
+	 * @param parameterIndex the index of the parameter: -1 for the method     -1方法返回类型  0第一个方法参数 1第二个方法参数
 	 * return type; 0 for the first method parameter; 1 for the second method
 	 * parameter, etc.
 	 */
