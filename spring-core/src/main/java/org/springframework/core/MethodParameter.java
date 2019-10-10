@@ -165,7 +165,7 @@ public class MethodParameter {
 	}
 
 	/**
-	 * Return the class that declares the underlying Method or Constructor.
+	 * Return the class that declares the underlying Method or Constructor.  获取定义这个方法或者构造函数的 类
 	 */
 	public Class<?> getDeclaringClass() {
 		return getMember().getDeclaringClass();
