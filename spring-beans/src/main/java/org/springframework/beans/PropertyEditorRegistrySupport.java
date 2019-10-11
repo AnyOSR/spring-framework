@@ -103,17 +103,13 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	private ConversionService conversionService;
 
 	private boolean defaultEditorsActive = false;
-
 	private boolean configValueEditorsActive = false;
 
 	private Map<Class<?>, PropertyEditor> defaultEditors;
-
 	private Map<Class<?>, PropertyEditor> overriddenDefaultEditors;
-
 	private Map<Class<?>, PropertyEditor> customEditors;
 
 	private Map<String, CustomEditorHolder> customEditorsForPath;
-
 	private Map<Class<?>, PropertyEditor> customEditorCache;
 
 
