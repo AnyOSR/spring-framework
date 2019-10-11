@@ -51,25 +51,22 @@ public class MethodParameter {
 	private final Method method;
 	private final Constructor<?> constructor;
 
-	private final int parameterIndex;
-
-	private int nestingLevel = 1;
-
 	/** Map from Integer level to Integer type index */
 	// nestingLevel - typeIndex
 	Map<Integer, Integer> typeIndexesPerLevel;
+	private int nestingLevel = 1;
 
 	private volatile Class<?> containingClass;
 
+	private final int parameterIndex;
+	private volatile String parameterName;
 	private volatile Class<?> parameterType;
-
 	private volatile Type genericParameterType;
-
 	private volatile Annotation[] parameterAnnotations;
 
 	private volatile ParameterNameDiscoverer parameterNameDiscoverer;
 
-	private volatile String parameterName;
+
 
 
 	/**
@@ -412,8 +409,7 @@ public class MethodParameter {
 	 */
 	public Annotation[] getParameterAnnotations() {
 		if (this.parameterAnnotations == null) {
-			Annotation[][] annotationArray = (this.method != null ?
-					this.method.getParameterAnnotations() : this.constructor.getParameterAnnotations());
+			Annotation[][] annotationArray = (this.method != null ? this.method.getParameterAnnotations() : this.constructor.getParameterAnnotations());
 			if (this.parameterIndex >= 0 && this.parameterIndex < annotationArray.length) {
 				this.parameterAnnotations = adaptAnnotationArray(annotationArray[this.parameterIndex]);
 			}
@@ -478,8 +474,7 @@ public class MethodParameter {
 	public String getParameterName() {
 		ParameterNameDiscoverer discoverer = this.parameterNameDiscoverer;
 		if (discoverer != null) {
-			String[] parameterNames = (this.method != null ?
-					discoverer.getParameterNames(this.method) : discoverer.getParameterNames(this.constructor));
+			String[] parameterNames = (this.method != null ? discoverer.getParameterNames(this.method) : discoverer.getParameterNames(this.constructor));
 			if (parameterNames != null) {
 				this.parameterName = parameterNames[this.parameterIndex];
 			}

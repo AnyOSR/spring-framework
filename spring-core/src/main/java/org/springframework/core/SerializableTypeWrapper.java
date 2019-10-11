@@ -59,12 +59,16 @@ abstract class SerializableTypeWrapper {
 	private static final Class<?>[] SUPPORTED_SERIALIZABLE_TYPES = {
 			GenericArrayType.class, ParameterizedType.class, TypeVariable.class, WildcardType.class};
 
-	private static final ConcurrentReferenceHashMap<Type, Type> cache =
-			new ConcurrentReferenceHashMap<Type, Type>(256);
+	// value 为代理类 其invocationHandler为 TypeProxyInvocationHandler
+	// 该代理类 会拦截 无方法参数且返回参数类型为type或者type数组的 方法调用
+	// 并生成一个代理类返回
+	private static final ConcurrentReferenceHashMap<Type, Type> cache = new ConcurrentReferenceHashMap<Type, Type>(256);
 
 
 	/**
 	 * Return a {@link Serializable} variant of {@link Field#getGenericType()}.
+	 * 生成一个代理类实例 其InvocationHandler里面的provider为FieldTypeProvider
+	 *
 	 */
 	public static Type forField(Field field) {
 		Assert.notNull(field, "Field must not be null");
@@ -145,7 +149,7 @@ abstract class SerializableTypeWrapper {
 	/**
 	 * Return a {@link Serializable} {@link Type} backed by a {@link TypeProvider} .
 	 */
-	// 返回一个实现了Serializable Type SerializableTypeProxy接口的动态代理类
+	// 返回一个实现了Serializable Type SerializableTypeProxy接口的动态代理类实例
 	static Type forTypeProvider(final TypeProvider provider) {
 		Assert.notNull(provider, "Provider must not be null");
 		if (provider.getType() instanceof Serializable || provider.getType() == null) {
@@ -218,10 +222,12 @@ abstract class SerializableTypeWrapper {
 	 * {@link Serializable} {@link InvocationHandler} used by the proxied {@link Type}.
 	 * Provides serialization support and enhances any methods that return {@code Type}
 	 * or {@code Type[]}.
+	 * 这个类会对返回类型为Type或Type数组 且无方法参数的方法调用 生成一个动态代理类，其provider只会为MethodInvokeTypeProvider
 	 */
 	@SuppressWarnings("serial")
 	private static class TypeProxyInvocationHandler implements InvocationHandler, Serializable {
 
+		// 底层provider
 		private final TypeProvider provider;
 
 		public TypeProxyInvocationHandler(TypeProvider provider) {
@@ -246,6 +252,7 @@ abstract class SerializableTypeWrapper {
 			}
 
 			// 如果返回是Type且没有参数
+			// 则返回一个动态代理类，其TypeProvider为MethodInvokeTypeProvider
 			if (Type.class == method.getReturnType() && args == null) {
 				return forTypeProvider(new MethodInvokeTypeProvider(this.provider, method, -1));
 			}
@@ -287,11 +294,13 @@ abstract class SerializableTypeWrapper {
 			this.field = field;
 		}
 
+		// 返回field字段的声明类型
 		@Override
 		public Type getType() {
 			return this.field.getGenericType();
 		}
 
+		// 返回底层的field字段
 		@Override
 		public Object getSource() {
 			return this.field;
@@ -372,7 +381,7 @@ abstract class SerializableTypeWrapper {
 
 
 	/**
-	 * {@link TypeProvider} for {@link Type}s obtained by invoking a no-arg method.
+	 * {@link TypeProvider} for {@link Type}s obtained by invoking a no-arg method.   没有参数的方法调用
 	 */
 	@SuppressWarnings("serial")
 	static class MethodInvokeTypeProvider implements TypeProvider {
@@ -394,6 +403,7 @@ abstract class SerializableTypeWrapper {
 			this.method = method;
 		}
 
+		// getType时进行实际的方法调用
 		@Override
 		public Type getType() {
 			Object result = this.result;
