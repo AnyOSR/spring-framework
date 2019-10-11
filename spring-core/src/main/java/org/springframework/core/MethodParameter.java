@@ -56,6 +56,7 @@ public class MethodParameter {
 	private int nestingLevel = 1;
 
 	/** Map from Integer level to Integer type index */
+	// nestingLevel - typeIndex
 	Map<Integer, Integer> typeIndexesPerLevel;
 
 	private volatile Class<?> containingClass;
