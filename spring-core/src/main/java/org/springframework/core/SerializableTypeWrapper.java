@@ -150,8 +150,11 @@ abstract class SerializableTypeWrapper {
 	 * Return a {@link Serializable} {@link Type} backed by a {@link TypeProvider} .
 	 */
 	// 返回一个实现了Serializable Type SerializableTypeProxy接口的动态代理类实例
+	// 返回类型是Type
 	static Type forTypeProvider(final TypeProvider provider) {
 		Assert.notNull(provider, "Provider must not be null");
+
+		// 如果type已经是Serializable 或者provider.getType()为null
 		if (provider.getType() instanceof Serializable || provider.getType() == null) {
 			return provider.getType();
 		}
