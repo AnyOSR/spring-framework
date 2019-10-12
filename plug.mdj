@@ -5459,7 +5459,25 @@
 											"top": 78,
 											"width": 436.8330078125,
 											"height": 13,
+											"underline": true,
 											"text": "+cache: ConcurrentReferenceHashMap<ResolvableType, ResolvableType>",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFtu1HgNWAiPzA=",
+											"_parent": {
+												"$ref": "AAAAAAFswtbgISKISC8="
+											},
+											"model": {
+												"$ref": "AAAAAAFtu1HfymAf3XI="
+											},
+											"font": "Arial;13;0",
+											"left": 3085,
+											"top": 93,
+											"width": 436.8330078125,
+											"height": 13,
+											"text": "+",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5473,7 +5491,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 93,
+											"top": 108,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+resolved: final Class<?>",
@@ -5490,7 +5508,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 108,
+											"top": 123,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+type: final Type",
@@ -5507,27 +5525,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 123,
-											"width": 436.8330078125,
-											"height": 13,
-											"text": "+typeProvider: final TypeProvider",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFswtm3myLZpPA=",
-											"_parent": {
-												"$ref": "AAAAAAFswtbgISKISC8="
-											},
-											"model": {
-												"$ref": "AAAAAAFswtm3YiLWUXE="
-											},
-											"font": "Arial;13;0",
-											"left": 3085,
 											"top": 138,
 											"width": 436.8330078125,
 											"height": 13,
-											"text": "+hash: final Integer",
+											"text": "+typeProvider: final TypeProvider",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5549,6 +5550,23 @@
 										},
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFswtm3myLZpPA=",
+											"_parent": {
+												"$ref": "AAAAAAFswtbgISKISC8="
+											},
+											"model": {
+												"$ref": "AAAAAAFswtm3YiLWUXE="
+											},
+											"font": "Arial;13;0",
+											"left": 3085,
+											"top": 168,
+											"width": 436.8330078125,
+											"height": 13,
+											"text": "+hash: final Integer",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAFszOmU+CO0Z+c=",
 											"_parent": {
 												"$ref": "AAAAAAFswtbgISKISC8="
@@ -5558,7 +5576,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 168,
+											"top": 183,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+",
@@ -5575,7 +5593,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 183,
+											"top": 198,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+componentType: final ResolvableType",
@@ -5592,7 +5610,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 198,
+											"top": 213,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+superType: ResolvableType",
@@ -5609,7 +5627,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 213,
+											"top": 228,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+interfaces: ResolvableType[]",
@@ -5626,7 +5644,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 228,
+											"top": 243,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+generics: ResolvableType[]",
@@ -5637,7 +5655,7 @@
 									"left": 3080,
 									"top": 73,
 									"width": 446.8330078125,
-									"height": 173
+									"height": 188
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -5660,7 +5678,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3085,
-											"top": 251,
+											"top": 266,
 											"width": 436.8330078125,
 											"height": 13,
 											"text": "+Class<?> getRawClass()",
@@ -5669,7 +5687,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 3080,
-									"top": 246,
+									"top": 261,
 									"width": 446.8330078125,
 									"height": 23
 								},
@@ -5711,7 +5729,7 @@
 							"left": 3080,
 							"top": 48,
 							"width": 446.8330078125,
-							"height": 221,
+							"height": 236,
 							"nameCompartment": {
 								"$ref": "AAAAAAFswtbgICKDB30="
 							},
@@ -7847,7 +7865,16 @@
 								"$ref": "AAAAAAFswtbgICKAUOI="
 							},
 							"name": "cache",
+							"isStatic": true,
 							"type": "ConcurrentReferenceHashMap<ResolvableType, ResolvableType>"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFtu1HfymAf3XI=",
+							"_parent": {
+								"$ref": "AAAAAAFswtbgICKAUOI="
+							},
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7878,21 +7905,21 @@
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAFswtm3YiLWUXE=",
-							"_parent": {
-								"$ref": "AAAAAAFswtbgICKAUOI="
-							},
-							"name": "hash",
-							"type": "final Integer"
-						},
-						{
-							"_type": "UMLAttribute",
 							"_id": "AAAAAAFswtl61iLBviU=",
 							"_parent": {
 								"$ref": "AAAAAAFswtbgICKAUOI="
 							},
 							"name": "variableResolver",
 							"type": "final VariableResolver"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFswtm3YiLWUXE=",
+							"_parent": {
+								"$ref": "AAAAAAFswtbgICKAUOI="
+							},
+							"name": "hash",
+							"type": "final Integer"
 						},
 						{
 							"_type": "UMLAttribute",

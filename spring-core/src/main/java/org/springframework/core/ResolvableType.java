@@ -94,9 +94,7 @@ public class ResolvableType implements Serializable {
 
 	private static final ResolvableType[] EMPTY_TYPES_ARRAY = new ResolvableType[0];
 
-	private static final ConcurrentReferenceHashMap<ResolvableType, ResolvableType> cache =
-			new ConcurrentReferenceHashMap<ResolvableType, ResolvableType>(256);
-
+	private static final ConcurrentReferenceHashMap<ResolvableType, ResolvableType> cache = new ConcurrentReferenceHashMap<ResolvableType, ResolvableType>(256);
 
 	/**
 	 * The underlying Java type being managed (only ever {@code null} for {@link #NONE}).
@@ -109,26 +107,23 @@ public class ResolvableType implements Serializable {
 	private final TypeProvider typeProvider;
 
 	/**
+	 * Copy of the resolved value.
+	 */
+	private final Class<?> resolved;
+
+	/**
 	 * The {@code VariableResolver} to use or {@code null} if no resolver is available.
 	 */
 	private final VariableResolver variableResolver;
+
+	private final Integer hash;
 
 	/**
 	 * The component type for an array or {@code null} if the type should be deduced.
 	 */
 	private final ResolvableType componentType;
-
-	/**
-	 * Copy of the resolved value.
-	 */
-	private final Class<?> resolved;
-
-	private final Integer hash;
-
 	private ResolvableType superType;
-
 	private ResolvableType[] interfaces;
-
 	private ResolvableType[] generics;
 
 
