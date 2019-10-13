@@ -5204,6 +5204,23 @@
 										},
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsl5HwN4dQcfU=",
+											"_parent": {
+												"$ref": "AAAAAAFsl4sKN4ZLODk="
+											},
+											"model": {
+												"$ref": "AAAAAAFsl5Hv8IdNlaY="
+											},
+											"font": "Arial;13;0",
+											"left": 1101,
+											"top": 1242,
+											"width": 653.57373046875,
+											"height": 13,
+											"text": "+mergedBeanDefinitions: Map<String, RootBeanDefinition>",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAFsl5BzlYcDzs8=",
 											"_parent": {
 												"$ref": "AAAAAAFsl4sKN4ZLODk="
@@ -5213,7 +5230,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1101,
-											"top": 1242,
+											"top": 1257,
 											"width": 653.57373046875,
 											"height": 13,
 											"text": "+cacheBeanMetadata: boolean",
@@ -5230,7 +5247,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1101,
-											"top": 1257,
+											"top": 1272,
 											"width": 653.57373046875,
 											"height": 13,
 											"text": "+hasInstantiationAwareBeanPostProcessors: boolean",
@@ -5247,7 +5264,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1101,
-											"top": 1272,
+											"top": 1287,
 											"width": 653.57373046875,
 											"height": 13,
 											"text": "+hasDestructionAwareBeanPostProcessors: boolean",
@@ -5264,27 +5281,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1101,
-											"top": 1287,
-											"width": 653.57373046875,
-											"height": 13,
-											"text": "+scopes: Map<String, Scope>",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFsl5HwN4dQcfU=",
-											"_parent": {
-												"$ref": "AAAAAAFsl4sKN4ZLODk="
-											},
-											"model": {
-												"$ref": "AAAAAAFsl5Hv8IdNlaY="
-											},
-											"font": "Arial;13;0",
-											"left": 1101,
 											"top": 1302,
 											"width": 653.57373046875,
 											"height": 13,
-											"text": "+mergedBeanDefinitions: Map<String, RootBeanDefinition>",
+											"text": "+scopes: Map<String, Scope>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7263,6 +7263,15 @@
 						},
 						{
 							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsl5Hv8IdNlaY=",
+							"_parent": {
+								"$ref": "AAAAAAFsl4sKNoZDUdw="
+							},
+							"name": "mergedBeanDefinitions",
+							"type": "Map<String, RootBeanDefinition>"
+						},
+						{
+							"_type": "UMLAttribute",
 							"_id": "AAAAAAFsl5BzUIcAjhs=",
 							"_parent": {
 								"$ref": "AAAAAAFsl4sKNoZDUdw="
@@ -7296,15 +7305,6 @@
 							},
 							"name": "scopes",
 							"type": "Map<String, Scope>"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFsl5Hv8IdNlaY=",
-							"_parent": {
-								"$ref": "AAAAAAFsl4sKNoZDUdw="
-							},
-							"name": "mergedBeanDefinitions",
-							"type": "Map<String, RootBeanDefinition>"
 						},
 						{
 							"_type": "UMLAttribute",
