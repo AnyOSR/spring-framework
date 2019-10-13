@@ -446,8 +446,7 @@ public abstract class BeanUtils {
 			Class<?> editorClass = cl.loadClass(editorName);
 			if (!PropertyEditor.class.isAssignableFrom(editorClass)) {
 				if (logger.isWarnEnabled()) {
-					logger.warn("Editor class [" + editorName +
-							"] does not implement [java.beans.PropertyEditor] interface");
+					logger.warn("Editor class [" + editorName + "] does not implement [java.beans.PropertyEditor] interface");
 				}
 				unknownEditorTypes.add(targetType);
 				return null;

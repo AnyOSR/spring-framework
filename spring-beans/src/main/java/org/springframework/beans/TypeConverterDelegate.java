@@ -135,9 +135,7 @@ class TypeConverterDelegate {
 	 * @return the new value, possibly the result of type conversion
 	 * @throws IllegalArgumentException if type conversion failed
 	 */
-	public <T> T convertIfNecessary(
-			String propertyName, Object oldValue, Object newValue, Class<T> requiredType)
-			throws IllegalArgumentException {
+	public <T> T convertIfNecessary(String propertyName, Object oldValue, Object newValue, Class<T> requiredType) throws IllegalArgumentException {
 
 		return convertIfNecessary(propertyName, oldValue, newValue, requiredType, TypeDescriptor.valueOf(requiredType));
 	}
@@ -155,21 +153,20 @@ class TypeConverterDelegate {
 	 * @throws IllegalArgumentException if type conversion failed
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T convertIfNecessary(String propertyName, Object oldValue, Object newValue,
-			Class<T> requiredType, TypeDescriptor typeDescriptor) throws IllegalArgumentException {
+	public <T> T convertIfNecessary(String propertyName, Object oldValue, Object newValue, Class<T> requiredType, TypeDescriptor typeDescriptor) throws IllegalArgumentException {
 
 		// Custom editor for this type?
 		PropertyEditor editor = this.propertyEditorRegistry.findCustomEditor(requiredType, propertyName);
-
-		ConversionFailedException conversionAttemptEx = null;
-
 		// No custom editor but custom ConversionService specified?
 		ConversionService conversionService = this.propertyEditorRegistry.getConversionService();
+		ConversionFailedException conversionAttemptEx = null;
+
+		// 如果只存在ConversionService
 		if (editor == null && conversionService != null && newValue != null && typeDescriptor != null) {
 			TypeDescriptor sourceTypeDesc = TypeDescriptor.forObject(newValue);
 			if (conversionService.canConvert(sourceTypeDesc, typeDescriptor)) {
 				try {
-					return (T) conversionService.convert(newValue, sourceTypeDesc, typeDescriptor);
+					return (T) conversionService.convert(newValue, sourceTypeDesc, typeDescriptor);    // 将newValue转换为typeDescriptor的类型
 				}
 				catch (ConversionFailedException ex) {
 					// fallback to default conversion logic below
@@ -181,10 +178,18 @@ class TypeConverterDelegate {
 		Object convertedValue = newValue;
 
 		// Value not of required type?
+		// editor不为null
+		// 或者newValue和requiredType类型不兼容
 		if (editor != null || (requiredType != null && !ClassUtils.isAssignableValue(requiredType, convertedValue))) {
-			if (typeDescriptor != null && requiredType != null && Collection.class.isAssignableFrom(requiredType) &&
-					convertedValue instanceof String) {
+
+			// requiredType不为null且是Collection的子类 typeDescriptor也不为null newValue为String
+			if (typeDescriptor != null && requiredType != null && Collection.class.isAssignableFrom(requiredType) && convertedValue instanceof String) {
+
+				// 获取typeDescriptor的元素类型 (数组 collection元素)
 				TypeDescriptor elementTypeDesc = typeDescriptor.getElementTypeDescriptor();
+
+				// 如果typeDescriptor的元素类型存在(表明typeDescriptor是个数组或者Collection) 且？？
+				// 则首先将convertedValue转换为数组(String->数组)
 				if (elementTypeDesc != null && Enum.class.isAssignableFrom(elementTypeDesc.getType())) {
 					convertedValue = StringUtils.commaDelimitedListToStringArray((String) convertedValue);
 				}
@@ -192,6 +197,7 @@ class TypeConverterDelegate {
 			if (editor == null) {
 				editor = findDefaultEditor(requiredType);
 			}
+			// 对convertedValue利用特定的editor进行转换
 			convertedValue = doConvertValue(oldValue, convertedValue, requiredType, editor);
 		}
 
@@ -201,39 +207,44 @@ class TypeConverterDelegate {
 			// Try to apply some standard type conversion rules if appropriate.
 
 			if (convertedValue != null) {
+
+				// 如果requiredType为Object
 				if (Object.class == requiredType) {
 					return (T) convertedValue;
 				}
-				else if (requiredType.isArray()) {
+				else if (requiredType.isArray()) {  // 如果是数组
 					// Array required -> apply appropriate conversion of elements.
 					if (convertedValue instanceof String && Enum.class.isAssignableFrom(requiredType.getComponentType())) {
 						convertedValue = StringUtils.commaDelimitedListToStringArray((String) convertedValue);
 					}
 					return (T) convertToTypedArray(convertedValue, propertyName, requiredType.getComponentType());
 				}
-				else if (convertedValue instanceof Collection) {
+				else if (convertedValue instanceof Collection) { // 如果是Collection
 					// Convert elements to target type, if determined.
-					convertedValue = convertToTypedCollection(
-							(Collection<?>) convertedValue, propertyName, requiredType, typeDescriptor);
+					convertedValue = convertToTypedCollection((Collection<?>) convertedValue, propertyName, requiredType, typeDescriptor);
 					standardConversion = true;
 				}
-				else if (convertedValue instanceof Map) {
+				else if (convertedValue instanceof Map) {    // 如果是Map
 					// Convert keys and values to respective target type, if determined.
-					convertedValue = convertToTypedMap(
-							(Map<?, ?>) convertedValue, propertyName, requiredType, typeDescriptor);
+					convertedValue = convertToTypedMap((Map<?, ?>) convertedValue, propertyName, requiredType, typeDescriptor);
 					standardConversion = true;
 				}
-				if (convertedValue.getClass().isArray() && Array.getLength(convertedValue) == 1) {
+
+				if (convertedValue.getClass().isArray() && Array.getLength(convertedValue) == 1) { // 如果是数组，但是长度为1
 					convertedValue = Array.get(convertedValue, 0);
 					standardConversion = true;
 				}
+
+				// 如果requiredType是String 且convertedValue是基本类型或其包装类型
 				if (String.class == requiredType && ClassUtils.isPrimitiveOrWrapper(convertedValue.getClass())) {
 					// We can stringify any primitive value...
 					return (T) convertedValue.toString();
 				}
+				// 如果convertedValue是String 但是requiredType不是String类型
 				else if (convertedValue instanceof String && !requiredType.isInstance(convertedValue)) {
 					if (conversionAttemptEx == null && !requiredType.isInterface() && !requiredType.isEnum()) {
 						try {
+							// 首先尝试根据构造函数转换为requiredType
 							Constructor<T> strCtor = requiredType.getConstructor(String.class);
 							return BeanUtils.instantiateClass(strCtor, convertedValue);
 						}
@@ -249,6 +260,8 @@ class TypeConverterDelegate {
 							}
 						}
 					}
+					// 根据构造函数没有转换成功
+					// 尝试枚举
 					String trimmedValue = ((String) convertedValue).trim();
 					if (requiredType.isEnum() && "".equals(trimmedValue)) {
 						// It's an empty enum identifier: reset the enum value to null.
@@ -258,8 +271,7 @@ class TypeConverterDelegate {
 					standardConversion = true;
 				}
 				else if (convertedValue instanceof Number && Number.class.isAssignableFrom(requiredType)) {
-					convertedValue = NumberUtils.convertNumberToTargetClass(
-							(Number) convertedValue, (Class<Number>) requiredType);
+					convertedValue = NumberUtils.convertNumberToTargetClass((Number) convertedValue, (Class<Number>) requiredType);
 					standardConversion = true;
 				}
 			}
@@ -270,6 +282,7 @@ class TypeConverterDelegate {
 				}
 			}
 
+			// 如果还是不一致
 			if (!ClassUtils.isAssignableValue(requiredType, convertedValue)) {
 				if (conversionAttemptEx != null) {
 					// Original exception from former ConversionService call above...
@@ -308,8 +321,7 @@ class TypeConverterDelegate {
 			if (editor == null && !standardConversion && requiredType != null && Object.class != requiredType) {
 				throw conversionAttemptEx;
 			}
-			logger.debug("Original ConversionService attempt failed - ignored since " +
-					"PropertyEditor based conversion eventually succeeded", conversionAttemptEx);
+			logger.debug("Original ConversionService attempt failed - ignored since " + "PropertyEditor based conversion eventually succeeded", conversionAttemptEx);
 		}
 
 		return (T) convertedValue;
@@ -466,29 +478,27 @@ class TypeConverterDelegate {
 	}
 
 	private Object convertToTypedArray(Object input, String propertyName, Class<?> componentType) {
+		// 如果输入是Collection
 		if (input instanceof Collection) {
 			// Convert Collection elements to array elements.
 			Collection<?> coll = (Collection<?>) input;
 			Object result = Array.newInstance(componentType, coll.size());
 			int i = 0;
 			for (Iterator<?> it = coll.iterator(); it.hasNext(); i++) {
-				Object value = convertIfNecessary(
-						buildIndexedPropertyName(propertyName, i), null, it.next(), componentType);
+				Object value = convertIfNecessary(buildIndexedPropertyName(propertyName, i), null, it.next(), componentType);
 				Array.set(result, i, value);
 			}
 			return result;
 		}
 		else if (input.getClass().isArray()) {
 			// Convert array elements, if necessary.
-			if (componentType.equals(input.getClass().getComponentType()) &&
-					!this.propertyEditorRegistry.hasCustomEditorForElement(componentType, propertyName)) {
+			if (componentType.equals(input.getClass().getComponentType()) && !this.propertyEditorRegistry.hasCustomEditorForElement(componentType, propertyName)) {
 				return input;
 			}
 			int arrayLength = Array.getLength(input);
 			Object result = Array.newInstance(componentType, arrayLength);
 			for (int i = 0; i < arrayLength; i++) {
-				Object value = convertIfNecessary(
-						buildIndexedPropertyName(propertyName, i), null, Array.get(input, i), componentType);
+				Object value = convertIfNecessary(buildIndexedPropertyName(propertyName, i), null, Array.get(input, i), componentType);
 				Array.set(result, i, value);
 			}
 			return result;
@@ -496,16 +506,14 @@ class TypeConverterDelegate {
 		else {
 			// A plain value: convert it to an array with a single component.
 			Object result = Array.newInstance(componentType, 1);
-			Object value = convertIfNecessary(
-					buildIndexedPropertyName(propertyName, 0), null, input, componentType);
+			Object value = convertIfNecessary(buildIndexedPropertyName(propertyName, 0), null, input, componentType);
 			Array.set(result, 0, value);
 			return result;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private Collection<?> convertToTypedCollection(
-			Collection<?> original, String propertyName, Class<?> requiredType, TypeDescriptor typeDescriptor) {
+	private Collection<?> convertToTypedCollection(Collection<?> original, String propertyName, Class<?> requiredType, TypeDescriptor typeDescriptor) {
 
 		if (!Collection.class.isAssignableFrom(requiredType)) {
 			return original;
@@ -522,8 +530,7 @@ class TypeConverterDelegate {
 
 		boolean originalAllowed = requiredType.isInstance(original);
 		TypeDescriptor elementType = typeDescriptor.getElementTypeDescriptor();
-		if (elementType == null && originalAllowed &&
-				!this.propertyEditorRegistry.hasCustomEditorForElement(null, propertyName)) {
+		if (elementType == null && originalAllowed && !this.propertyEditorRegistry.hasCustomEditorForElement(null, propertyName)) {
 			return original;
 		}
 
@@ -567,8 +574,7 @@ class TypeConverterDelegate {
 		for (; it.hasNext(); i++) {
 			Object element = it.next();
 			String indexedPropertyName = buildIndexedPropertyName(propertyName, i);
-			Object convertedElement = convertIfNecessary(indexedPropertyName, null, element,
-					(elementType != null ? elementType.getType() : null) , elementType);
+			Object convertedElement = convertIfNecessary(indexedPropertyName, null, element, (elementType != null ? elementType.getType() : null) , elementType);
 			try {
 				convertedCopy.add(convertedElement);
 			}
@@ -579,14 +585,14 @@ class TypeConverterDelegate {
 				}
 				return original;
 			}
+			// 只要有一个转化成功，则返回convertedCopy
 			originalAllowed = originalAllowed && (element == convertedElement);
 		}
 		return (originalAllowed ? original : convertedCopy);
 	}
 
 	@SuppressWarnings("unchecked")
-	private Map<?, ?> convertToTypedMap(
-			Map<?, ?> original, String propertyName, Class<?> requiredType, TypeDescriptor typeDescriptor) {
+	private Map<?, ?> convertToTypedMap(Map<?, ?> original, String propertyName, Class<?> requiredType, TypeDescriptor typeDescriptor) {
 
 		if (!Map.class.isAssignableFrom(requiredType)) {
 			return original;
@@ -604,8 +610,7 @@ class TypeConverterDelegate {
 		boolean originalAllowed = requiredType.isInstance(original);
 		TypeDescriptor keyType = typeDescriptor.getMapKeyTypeDescriptor();
 		TypeDescriptor valueType = typeDescriptor.getMapValueTypeDescriptor();
-		if (keyType == null && valueType == null && originalAllowed &&
-				!this.propertyEditorRegistry.hasCustomEditorForElement(null, propertyName)) {
+		if (keyType == null && valueType == null && originalAllowed && !this.propertyEditorRegistry.hasCustomEditorForElement(null, propertyName)) {
 			return original;
 		}
 
@@ -650,10 +655,8 @@ class TypeConverterDelegate {
 			Object key = entry.getKey();
 			Object value = entry.getValue();
 			String keyedPropertyName = buildKeyedPropertyName(propertyName, key);
-			Object convertedKey = convertIfNecessary(keyedPropertyName, null, key,
-					(keyType != null ? keyType.getType() : null), keyType);
-			Object convertedValue = convertIfNecessary(keyedPropertyName, null, value,
-					(valueType!= null ? valueType.getType() : null), valueType);
+			Object convertedKey = convertIfNecessary(keyedPropertyName, null, key, (keyType != null ? keyType.getType() : null), keyType);
+			Object convertedValue = convertIfNecessary(keyedPropertyName, null, value, (valueType!= null ? valueType.getType() : null), valueType);
 			try {
 				convertedCopy.put(convertedKey, convertedValue);
 			}
@@ -681,6 +684,8 @@ class TypeConverterDelegate {
 				null);
 	}
 
+	// 不是接口 不是抽象类
+	// public 有public构造器
 	private boolean canCreateCopy(Class<?> requiredType) {
 		return (!requiredType.isInterface() && !Modifier.isAbstract(requiredType.getModifiers()) &&
 				Modifier.isPublic(requiredType.getModifiers()) && ClassUtils.hasConstructor(requiredType));
