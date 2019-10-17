@@ -355,8 +355,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 			throw new IllegalStateException("No bean class specified on bean definition");
 		}
 		if (!(beanClassObject instanceof Class)) {
-			throw new IllegalStateException(
-					"Bean class name [" + beanClassObject + "] has not been resolved into an actual Class");
+			throw new IllegalStateException("Bean class name [" + beanClassObject + "] has not been resolved into an actual Class");
 		}
 		return (Class<?>) beanClassObject;
 	}
@@ -510,7 +509,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	public int getResolvedAutowireMode() {
 		if (this.autowireMode == AUTOWIRE_AUTODETECT) {
-			// Work out whether to apply setter autowiring or constructor autowiring.
+			// Work out whether to apply setter autowiring or constructor autowiring.   set注入或者构造器注入
 			// If it has a no-arg constructor it's deemed to be setter autowiring,
 			// otherwise we'll try constructor autowiring.
 			Constructor<?>[] constructors = getBeanClass().getConstructors();
