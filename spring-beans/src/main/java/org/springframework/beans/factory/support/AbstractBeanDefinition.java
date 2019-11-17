@@ -514,11 +514,11 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 			// otherwise we'll try constructor autowiring.
 			Constructor<?>[] constructors = getBeanClass().getConstructors();
 			for (Constructor<?> constructor : constructors) {
-				if (constructor.getParameterTypes().length == 0) {
+				if (constructor.getParameterTypes().length == 0) {  //如果所有构造器都没有参数 则AUTOWIRE_BY_TYPE
 					return AUTOWIRE_BY_TYPE;
 				}
 			}
-			return AUTOWIRE_CONSTRUCTOR;
+			return AUTOWIRE_CONSTRUCTOR;   // 否则 构造器注入
 		}
 		else {
 			return this.autowireMode;

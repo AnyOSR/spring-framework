@@ -162,11 +162,10 @@ public class ConstructorArgumentValues {
 	public ValueHolder getIndexedArgumentValue(int index, Class<?> requiredType, String requiredName) {
 		Assert.isTrue(index >= 0, "Index must not be negative");
 		ValueHolder valueHolder = this.indexedArgumentValues.get(index);
+		// 如果valueHolder的type和name存在，则要求与requiredType和requiredName匹配
 		if (valueHolder != null &&
-				(valueHolder.getType() == null ||
-						(requiredType != null && ClassUtils.matchesTypeName(requiredType, valueHolder.getType()))) &&
-				(valueHolder.getName() == null ||
-						(requiredName != null && requiredName.equals(valueHolder.getName())))) {
+				(valueHolder.getType() == null || (requiredType != null && ClassUtils.matchesTypeName(requiredType, valueHolder.getType()))) &&
+				(valueHolder.getName() == null || (requiredName != null && requiredName.equals(valueHolder.getName())))) {
 			return valueHolder;
 		}
 		return null;
@@ -275,19 +274,23 @@ public class ConstructorArgumentValues {
 	 */
 	public ValueHolder getGenericArgumentValue(Class<?> requiredType, String requiredName, Set<ValueHolder> usedValueHolders) {
 		for (ValueHolder valueHolder : this.genericArgumentValues) {
-			if (usedValueHolders != null && usedValueHolders.contains(valueHolder)) {
+			if (usedValueHolders != null && usedValueHolders.contains(valueHolder)) {  // 已经存在于usedValueHolders中
 				continue;
 			}
-			if (valueHolder.getName() != null &&
-					(requiredName == null || !valueHolder.getName().equals(requiredName))) {
+
+			// valueHolder的name不为空，则需要严格匹配
+			if (valueHolder.getName() != null && (requiredName == null || !valueHolder.getName().equals(requiredName))) {
 				continue;
 			}
-			if (valueHolder.getType() != null &&
-					(requiredType == null || !ClassUtils.matchesTypeName(requiredType, valueHolder.getType()))) {
+			// valueHolder的type不为空，且需要严格匹配
+			if (valueHolder.getType() != null && (requiredType == null || !ClassUtils.matchesTypeName(requiredType, valueHolder.getType()))) {
 				continue;
 			}
-			if (requiredType != null && valueHolder.getType() == null && valueHolder.getName() == null &&
-					!ClassUtils.isAssignableValue(requiredType, valueHolder.getValue())) {
+
+			// valueHolder的type和name都为空
+			// 如果requiredType不为空，则要求requiredType和valueHolder.getValue()的类型匹配
+			if (valueHolder.getType() == null && valueHolder.getName() == null &&
+					requiredType != null && !ClassUtils.isAssignableValue(requiredType, valueHolder.getValue())) {
 				continue;
 			}
 			return valueHolder;
@@ -422,7 +425,7 @@ public class ConstructorArgumentValues {
 	}
 
 
-	/**
+	/**  构造器函数 参数值的容器
 	 * Holder for a constructor argument value, with an optional type
 	 * attribute indicating the target type of the actual constructor argument.
 	 */
