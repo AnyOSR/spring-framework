@@ -1203,7 +1203,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * @return a (potentially merged) RootBeanDefinition for the given bean
 	 * @throws BeanDefinitionStoreException in case of an invalid bean definition
 	 */
-	// bd只能是Root/ChildBeanDefinition？  containingBd是外部bean？ bd可能是内部bean？
+	// bd只能是Root/ChildBeanDefinition？
+	// containingBd是外部bean？
+	// bd可能是内部bean？
 	protected RootBeanDefinition getMergedBeanDefinition(String beanName, BeanDefinition bd, BeanDefinition containingBd) throws BeanDefinitionStoreException {
 
 		synchronized (this.mergedBeanDefinitions) {
@@ -1215,6 +1217,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 
 			if (mbd == null) {
+
 				if (bd.getParentName() == null) {
 					// Use copy of given root bean definition.
 					if (bd instanceof RootBeanDefinition) {
@@ -1223,8 +1226,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					else {
 						mbd = new RootBeanDefinition(bd);
 					}
-				}
-				else {
+				} else {
 					// Child bean definition: needs to be merged with parent.
 					// 有可能是ChildBeanDefinition 可能是GenericBeanDefinition 肯定不是RootBeanDefinition
 					// 只能是ChildBeanDefinition？

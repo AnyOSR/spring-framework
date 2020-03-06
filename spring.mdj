@@ -4938,7 +4938,7 @@
 											"font": "Arial;13;1",
 											"left": 1101,
 											"top": 1039,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "AbstractBeanFactory"
 										},
@@ -4973,7 +4973,7 @@
 									"font": "Arial;13;0",
 									"left": 1096,
 									"top": 1032,
-									"width": 663.57373046875,
+									"width": 683.83544921875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFsl4sKN4ZHaas="
@@ -5010,7 +5010,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1062,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+parentBeanFactory: BeanFactory",
 											"horizontalAlignment": 0
@@ -5027,7 +5027,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1077,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+beanClassLoader: ClassLoader",
 											"horizontalAlignment": 0
@@ -5044,7 +5044,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1092,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+tempClassLoader: ClassLoader",
 											"horizontalAlignment": 0
@@ -5061,7 +5061,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1107,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+",
 											"horizontalAlignment": 0
@@ -5078,7 +5078,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1122,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+beanExpressionResolver: BeanExpressionResolver",
 											"horizontalAlignment": 0
@@ -5095,7 +5095,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1137,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+typeConverter: TypeConverter",
 											"horizontalAlignment": 0
@@ -5112,7 +5112,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1152,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+conversionService: ConversionService",
 											"horizontalAlignment": 0
@@ -5129,7 +5129,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1167,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+propertyEditorRegistrars: Set<PropertyEditorRegistrar>",
 											"horizontalAlignment": 0
@@ -5146,7 +5146,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1182,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+customEditors: Map<Class<?>, Class<? extends PropertyEditor>>",
 											"horizontalAlignment": 0
@@ -5163,7 +5163,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1197,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+embeddedValueResolvers: List<StringValueResolver>",
 											"horizontalAlignment": 0
@@ -5180,7 +5180,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1212,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+",
 											"horizontalAlignment": 0
@@ -5197,7 +5197,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1227,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+beanPostProcessors: List<BeanPostProcessor>",
 											"horizontalAlignment": 0
@@ -5214,7 +5214,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1242,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+mergedBeanDefinitions: Map<String, RootBeanDefinition>",
 											"horizontalAlignment": 0
@@ -5231,7 +5231,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1257,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+cacheBeanMetadata: boolean",
 											"horizontalAlignment": 0
@@ -5248,7 +5248,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1272,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+hasInstantiationAwareBeanPostProcessors: boolean",
 											"horizontalAlignment": 0
@@ -5265,7 +5265,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1287,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+hasDestructionAwareBeanPostProcessors: boolean",
 											"horizontalAlignment": 0
@@ -5282,7 +5282,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1302,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+scopes: Map<String, Scope>",
 											"horizontalAlignment": 0
@@ -5299,7 +5299,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1317,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+alreadyCreated: Set<String>",
 											"horizontalAlignment": 0
@@ -5316,7 +5316,7 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1332,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+prototypesCurrentlyInCreation: ThreadLocal<Object>",
 											"horizontalAlignment": 0
@@ -5325,7 +5325,7 @@
 									"font": "Arial;13;0",
 									"left": 1096,
 									"top": 1057,
-									"width": 663.57373046875,
+									"width": 683.83544921875,
 									"height": 293
 								},
 								{
@@ -5350,17 +5350,51 @@
 											"font": "Arial;13;0",
 											"left": 1101,
 											"top": 1355,
-											"width": 653.57373046875,
+											"width": 673.83544921875,
 											"height": 13,
 											"text": "+<T> T doGetBean( final String name, final Class<T> requiredType, final Object[] args, boolean typeCheckOnly)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFwrrXMQ4UEFdc=",
+											"_parent": {
+												"$ref": "AAAAAAFsl4sKN4ZMOuA="
+											},
+											"model": {
+												"$ref": "AAAAAAFwrrXL54UBdHQ="
+											},
+											"font": "Arial;13;0",
+											"left": 1101,
+											"top": 1370,
+											"width": 673.83544921875,
+											"height": 13,
+											"text": "+Object getObjectForBeanInstance(Object beanInstance, String name, String beanName, RootBeanDefinition mbd)()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFwrtrz/IUMJDA=",
+											"_parent": {
+												"$ref": "AAAAAAFsl4sKN4ZMOuA="
+											},
+											"model": {
+												"$ref": "AAAAAAFwrtrzsIUJOoo="
+											},
+											"font": "Arial;13;0",
+											"left": 1101,
+											"top": 1385,
+											"width": 673.83544921875,
+											"height": 13,
+											"text": "+RootBeanDefinition getMergedBeanDefinition(String beanName, BeanDefinition bd, BeanDefinition containingBd)()",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1096,
 									"top": 1350,
-									"width": 663.57373046875,
-									"height": 23
+									"width": 683.83544921875,
+									"height": 53
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -5399,8 +5433,8 @@
 							"containerChangeable": true,
 							"left": 1096,
 							"top": 1032,
-							"width": 663.57373046875,
-							"height": 341,
+							"width": 683.83544921875,
+							"height": 371,
 							"nameCompartment": {
 								"$ref": "AAAAAAFsl4sKN4ZGmew="
 							},
@@ -7333,6 +7367,22 @@
 								"$ref": "AAAAAAFsl4sKNoZDUdw="
 							},
 							"name": "<T> T doGetBean( final String name, final Class<T> requiredType, final Object[] args, boolean typeCheckOnly)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFwrrXL54UBdHQ=",
+							"_parent": {
+								"$ref": "AAAAAAFsl4sKNoZDUdw="
+							},
+							"name": "Object getObjectForBeanInstance(Object beanInstance, String name, String beanName, RootBeanDefinition mbd)"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFwrtrzsIUJOoo=",
+							"_parent": {
+								"$ref": "AAAAAAFsl4sKNoZDUdw="
+							},
+							"name": "RootBeanDefinition getMergedBeanDefinition(String beanName, BeanDefinition bd, BeanDefinition containingBd)"
 						}
 					]
 				},
