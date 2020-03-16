@@ -297,6 +297,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				// Create bean instance.
 				if (mbd.isSingleton()) {
 					// 创建bean实例
+					// 创建一个ObjectFactory的实例，只有在调用其getObject时才真正的去createBean(延迟生成？)
 					sharedInstance = getSingleton(beanName, new ObjectFactory<Object>() {
 						@Override
 						public Object getObject() throws BeansException {
@@ -399,11 +400,15 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		String beanName = transformedBeanName(name);
 
 		Object beanInstance = getSingleton(beanName, false);
+		// 如果bean已经存在
 		if (beanInstance != null) {
+			// 如果是FactoryBean
 			if (beanInstance instanceof FactoryBean) {
+				// 如果前面有& 或者是单例
 				return (BeanFactoryUtils.isFactoryDereference(name) || ((FactoryBean<?>) beanInstance).isSingleton());
 			}
 			else {
+				// 否则是普通bean，但是不能以&开头
 				return !BeanFactoryUtils.isFactoryDereference(name);
 			}
 		}
@@ -503,6 +508,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				return (!BeanFactoryUtils.isFactoryDereference(name) && typeToMatch.isInstance(beanInstance));
 			}
 		}
+		// 实例存在 但是定义不存在 则注册的是一个null object
 		else if (containsSingleton(beanName) && !containsBeanDefinition(beanName)) {
 			// null instance registered
 			return false;
@@ -1216,8 +1222,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				mbd = this.mergedBeanDefinitions.get(beanName);
 			}
 
+			// 如果缓存不存在
 			if (mbd == null) {
-
+				// 如果没有parentName，直接返回，没啥逻辑
+				// RootBeanDefinition是merge了一些parent的信息？
 				if (bd.getParentName() == null) {
 					// Use copy of given root bean definition.
 					if (bd instanceof RootBeanDefinition) {
