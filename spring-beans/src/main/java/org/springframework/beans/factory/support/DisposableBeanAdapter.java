@@ -106,14 +106,13 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 	 * @param postProcessors the List of BeanPostProcessors
 	 * (potentially DestructionAwareBeanPostProcessor), if any
 	 */
-	public DisposableBeanAdapter(Object bean, String beanName, RootBeanDefinition beanDefinition,
-			List<BeanPostProcessor> postProcessors, AccessControlContext acc) {
+	public DisposableBeanAdapter(Object bean, String beanName, RootBeanDefinition beanDefinition, List<BeanPostProcessor> postProcessors, AccessControlContext acc) {
 
 		Assert.notNull(bean, "Disposable bean must not be null");
 		this.bean = bean;
 		this.beanName = beanName;
-		this.invokeDisposableBean =
-				(this.bean instanceof DisposableBean && !beanDefinition.isExternallyManagedDestroyMethod("destroy"));
+		// 是DisposableBean 且不是外部管理的destroy方法
+		this.invokeDisposableBean = (this.bean instanceof DisposableBean && !beanDefinition.isExternallyManagedDestroyMethod("destroy"));
 		this.nonPublicAccessAllowed = beanDefinition.isNonPublicAccessAllowed();
 		this.acc = acc;
 		String destroyMethodName = inferDestroyMethodIfNecessary(bean, beanDefinition);
@@ -176,11 +175,11 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 
 
 	/**
-	 * If the current value of the given beanDefinition's "destroyMethodName" property is
-	 * {@link AbstractBeanDefinition#INFER_METHOD}, then attempt to infer a destroy method.
-	 * Candidate methods are currently limited to public, no-arg methods named "close" or
-	 * "shutdown" (whether declared locally or inherited). The given BeanDefinition's
-	 * "destroyMethodName" is updated to be null if no such method is found, otherwise set
+	 * If the current value of the given beanDefinition's "destroyMethodName" property is      如果给定的beanDefinition的destroyMethodName是(inferred)
+	 * {@link AbstractBeanDefinition#INFER_METHOD}, then attempt to infer a destroy method.     会尝试 推断出一个 destroy方法
+	 * Candidate methods are currently limited to public, no-arg methods named "close" or       候选方法 是限定命名是close或者shutdown的 public且没有入参的方法(不管是声明的还是继承的)
+	 * "shutdown" (whether declared locally or inherited). The given BeanDefinition's           如果没有找到这个方法，则更新destroyMethodName为null
+	 * "destroyMethodName" is updated to be null if no such method is found, otherwise set      否则设置为推断出来的方法名称
 	 * to the name of the inferred method. This constant serves as the default for the
 	 * {@code @Bean#destroyMethod} attribute and the value of the constant may also be
 	 * used in XML within the {@code <bean destroy-method="">} or {@code
@@ -190,8 +189,7 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 	 */
 	private String inferDestroyMethodIfNecessary(Object bean, RootBeanDefinition beanDefinition) {
 		String destroyMethodName = beanDefinition.getDestroyMethodName();
-		if (AbstractBeanDefinition.INFER_METHOD.equals(destroyMethodName) ||
-				(destroyMethodName == null && closeableInterface.isInstance(bean))) {
+		if (AbstractBeanDefinition.INFER_METHOD.equals(destroyMethodName) || (destroyMethodName == null && closeableInterface.isInstance(bean))) {
 			// Only perform destroy method inference or Closeable detection
 			// in case of the bean not explicitly implementing DisposableBean
 			if (!(bean instanceof DisposableBean)) {

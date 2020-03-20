@@ -1273,11 +1273,11 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					mbd.setScope(RootBeanDefinition.SCOPE_SINGLETON);
 				}
 
-				// A bean contained in a non-singleton bean cannot be a singleton itself.           非单例bean里面包含的bean不能是单例的
+				// A bean contained in a non-singleton bean cannot be a singleton itself.           一个被 包含在非单例bean里面的bean 其本身不能是一个单例
 				// Let's correct this on the fly here, since this might be the result of
 				// parent-child merging for the outer bean, in which case the original inner bean
 				// definition will not have inherited the merged outer bean's singleton status.
-				// 根据containingBd的scope来决定 mbd的scope
+				// 如果containingBd不是单例且合并的bd是单例 则根据containingBd的scope来决定 mbd的scope
 				if (containingBd != null && !containingBd.isSingleton() && mbd.isSingleton()) {
 					mbd.setScope(containingBd.getScope());
 				}
