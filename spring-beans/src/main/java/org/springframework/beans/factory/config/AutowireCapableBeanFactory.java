@@ -230,16 +230,16 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 			throws BeansException;
 
 	/**
-	 * Apply the property values of the bean definition with the given name to
+	 * Apply the property values of the bean definition with the given name to                将特定名称bean定义的属性值 应用到给定的bean实例
 	 * the given bean instance. The bean definition can either define a fully
 	 * self-contained bean, reusing its property values, or just property values
 	 * meant to be used for existing bean instances.
-	 * <p>This method does <i>not</i> autowire bean properties; it just applies
-	 * explicitly defined property values. Use the {@link #autowireBeanProperties}
-	 * method to autowire an existing bean instance.
+	 * <p>This method does <i>not</i> autowire bean properties; it just applies               这个方法不装配bean属性
+	 * explicitly defined property values. Use the {@link #autowireBeanProperties}            这个只是应用 显示定义的属性值
+	 * method to autowire an existing bean instance.                                          利用autowireBeanProperties方法来装配一个已存在的bean实例
 	 * <b>Note: This method requires a bean definition for the given name!</b>
-	 * <p>Does <i>not</i> apply standard {@link BeanPostProcessor BeanPostProcessors}
-	 * callbacks or perform any further initialization of the bean. This interface
+	 * <p>Does <i>not</i> apply standard {@link BeanPostProcessor BeanPostProcessors}          不应用标准的BeanPostProcessor回调 或者
+	 * callbacks or perform any further initialization of the bean. This interface             做进一步的bean初始化操作
 	 * offers distinct, fine-grained operations for those purposes, for example
 	 * {@link #initializeBean}. However, {@link InstantiationAwareBeanPostProcessor}
 	 * callbacks are applied, if applicable to the configuration of the instance.
@@ -254,13 +254,13 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	void applyBeanPropertyValues(Object existingBean, String beanName) throws BeansException;
 
 	/**
-	 * Initialize the given raw bean, applying factory callbacks
-	 * such as {@code setBeanName} and {@code setBeanFactory},
-	 * also applying all bean post processors (including ones which
+	 * Initialize the given raw bean, applying factory callbacks                             初始化给定的原始bean，应用工厂回调
+	 * such as {@code setBeanName} and {@code setBeanFactory},                               setBeanName 或者 setBeanFactory
+	 * also applying all bean post processors (including ones which                          此外，应用所有的 bean post processors
 	 * might wrap the given raw bean).
-	 * <p>Note that no bean definition of the given name has to exist
-	 * in the bean factory. The passed-in bean name will simply be used
-	 * for callbacks but not checked against the registered bean definitions.
+	 * <p>Note that no bean definition of the given name has to exist                        需要注意的是，给定名字的bean定义 不一定非得存在于bean工厂
+	 * in the bean factory. The passed-in bean name will simply be used                      传递过来的bean名称 只是简单的用于回调
+	 * for callbacks but not checked against the registered bean definitions.                但是并不会比对已注册的bean定义进行检查
 	 * @param existingBean the existing bean instance
 	 * @param beanName the name of the bean, to be passed to it if necessary
 	 * (only passed to {@link BeanPostProcessor BeanPostProcessors})
