@@ -46,11 +46,11 @@ public class ProxyConfig implements Serializable {
 
 
 	/**
-	 * Set whether to proxy the target class directly, instead of just proxying
-	 * specific interfaces. Default is "false".
+	 * Set whether to proxy the target class directly, instead of just proxying   是否直接代理目标类 而不是
+	 * specific interfaces. Default is "false".                                   代理特定的接口
 	 * <p>Set this to "true" to force proxying for the TargetSource's exposed
-	 * target class. If that target class is an interface, a JDK proxy will be
-	 * created for the given interface. If that target class is any other class,
+	 * target class. If that target class is an interface, a JDK proxy will be     如果目标类是一个接口，JDK代理
+	 * created for the given interface. If that target class is any other class,   如果目标类是个类，CGLIB代理
 	 * a CGLIB proxy will be created for the given class.
 	 * <p>Note: Depending on the configuration of the concrete proxy factory,
 	 * the proxy-target-class behavior will also be applied if no interfaces
@@ -69,11 +69,11 @@ public class ProxyConfig implements Serializable {
 	}
 
 	/**
-	 * Set whether proxies should perform aggressive optimizations.
+	 * Set whether proxies should perform aggressive optimizations.                       代理是否要采取激进的优化
 	 * The exact meaning of "aggressive optimizations" will differ
 	 * between proxies, but there is usually some tradeoff.
 	 * Default is "false".
-	 * <p>For example, optimization will usually mean that advice changes won't
+	 * <p>For example, optimization will usually mean that advice changes won't           优化通常意味着 如果一个代理已经被创建，advice的改变将不会生效
 	 * take effect after a proxy has been created. For this reason, optimization
 	 * is disabled by default. An optimize value of "true" may be ignored
 	 * if other settings preclude optimization: for example, if "exposeProxy"
@@ -91,7 +91,7 @@ public class ProxyConfig implements Serializable {
 	}
 
 	/**
-	 * Set whether proxies created by this configuration should be prevented
+	 * Set whether proxies created by this configuration should be prevented       由这个配置创造的代理类是否 可以转换成Advised 去查询代理状态
 	 * from being cast to {@link Advised} to query proxy status.
 	 * <p>Default is "false", meaning that any AOP proxy can be cast to
 	 * {@link Advised}.
@@ -109,10 +109,10 @@ public class ProxyConfig implements Serializable {
 	}
 
 	/**
-	 * Set whether the proxy should be exposed by the AOP framework as a
+	 * Set whether the proxy should be exposed by the AOP framework as a            设定 代理对象能否被aop框架 通过AopContext这个类 暴露成一个ThreadLocal来检索
 	 * ThreadLocal for retrieval via the AopContext class. This is useful
-	 * if an advised object needs to call another advised method on itself.
-	 * (If it uses {@code this}, the invocation will not be advised).
+	 * if an advised object needs to call another advised method on itself.         如果一个advised object 需要调用他自己的另一个advised方法的话，将会有用
+	 * (If it uses {@code this}, the invocation will not be advised).               如果用this调用，则调用不会被advised
 	 * <p>Default is "false", in order to avoid unnecessary extra interception.
 	 * This means that no guarantees are provided that AopContext access will
 	 * work consistently within any method of the advised object.
