@@ -19,12 +19,12 @@ package org.springframework.aop;
 import java.lang.reflect.Method;
 
 /**
- * Part of a {@link Pointcut}: Checks whether the target method is eligible for advice.
+ * Part of a {@link Pointcut}: Checks whether the target method is eligible for advice.      检查一个 目标方法是否适合 advice
  *
- * <p>A MethodMatcher may be evaluated <b>statically</b> or at <b>runtime</b> (dynamically).
- * Static matching involves method and (possibly) method attributes. Dynamic matching
- * also makes arguments for a particular call available, and any effects of running
- * previous advice applying to the joinpoint.
+ * <p>A MethodMatcher may be evaluated <b>statically</b> or at <b>runtime</b> (dynamically).  一个MethodMatcher 既可以静态又可以运行时(动态) 被评估
+ * Static matching involves method and (possibly) method attributes. Dynamic matching         静态匹配包括 方法和方法属性
+ * also makes arguments for a particular call available, and any effects of running           动态评估包括 制造参数使一个特定的调用可用
+ * previous advice applying to the joinpoint.                                                  努力使 应用于joinpoint的之前的advice 跑起来
  *
  * <p>If an implementation returns {@code false} from its {@link #isRuntime()}
  * method, evaluation can be performed statically, and the result will be the same
