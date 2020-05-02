@@ -28,17 +28,17 @@ import java.lang.reflect.Method;
  *
  * <p>If an implementation returns {@code false} from its {@link #isRuntime()}
  * method, evaluation can be performed statically, and the result will be the same
- * for all invocations of this method, whatever their arguments. This means that
+ * for all invocations of this method, whatever their arguments. This means that             如果是静态的，则matches从不会被调用
  * if the {@link #isRuntime()} method returns {@code false}, the 3-arg
  * {@link #matches(java.lang.reflect.Method, Class, Object[])} method will never be invoked.
  *
  * <p>If an implementation returns {@code true} from its 2-arg
- * {@link #matches(java.lang.reflect.Method, Class)} method and its {@link #isRuntime()} method
- * returns {@code true}, the 3-arg {@link #matches(java.lang.reflect.Method, Class, Object[])}
- * method will be invoked <i>immediately before each potential execution of the related advice</i>,
- * to decide whether the advice should run. All previous advice, such as earlier interceptors
- * in an interceptor chain, will have run, so any state changes they have produced in
- * parameters or ThreadLocal state will be available at the time of evaluation.
+ * {@link #matches(java.lang.reflect.Method, Class)} method and its {@link #isRuntime()} method     如果是动态的
+ * returns {@code true}, the 3-arg {@link #matches(java.lang.reflect.Method, Class, Object[])}      在可能的相关联的advice被执行之前，matches方法都会被调用
+ * method will be invoked <i>immediately before each potential execution of the related advice</i>,  来决定 那个advice是否可以运行
+ * to decide whether the advice should run. All previous advice, such as earlier interceptors        所有之前的advice，比如interceptor链 之前的一些interceptor
+ * in an interceptor chain, will have run, so any state changes they have produced in                都会被执行，所以他们产生的任何状态变化(参数或者ThreadLocal状态)
+ * parameters or ThreadLocal state will be available at the time of evaluation.                      在执行时都是可用的
  *
  * @author Rod Johnson
  * @since 11.11.2003
