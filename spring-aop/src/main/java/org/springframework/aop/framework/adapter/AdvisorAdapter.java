@@ -22,11 +22,11 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.Advisor;
 
 /**
- * Interface allowing extension to the Spring AOP framework to allow
+ * Interface allowing extension to the Spring AOP framework to allow       允许spring aop框架扩展新的Advisors和Advice类型
  * handling of new Advisors and Advice types.
  *
- * <p>Implementing objects can create AOP Alliance Interceptors from
- * custom advice types, enabling these advice types to be used
+ * <p>Implementing objects can create AOP Alliance Interceptors from       实现的对象 可以从 特定的advice类型 来创造aop Interceptors
+ * custom advice types, enabling these advice types to be used             使得 这些advice类型 可以被spring aop框架使用(interception)
  * in the Spring AOP framework, which uses interception under the covers.
  *
  * <p>There is no need for most Spring users to implement this interface;

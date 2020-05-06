@@ -17,11 +17,11 @@
 package org.springframework.aop;
 
 /**
- * A {@code TargetSource} is used to obtain the current "target" of
- * an AOP invocation, which will be invoked via reflection if no around
- * advice chooses to end the interceptor chain itself.
+ * A {@code TargetSource} is used to obtain the current "target" of                 一个TargetSource 用于获取当前 AOP调用的 target
+ * an AOP invocation, which will be invoked via reflection if no around              会通过反射被调用 如果没有around advice被选择
+ * advice chooses to end the interceptor chain itself.                               来结束 interceptor chain 本身
  *
- * <p>If a {@code TargetSource} is "static", it will always return
+ * <p>If a {@code TargetSource} is "static", it will always return                   如果 是static的，永远返回同一个对象
  * the same target, allowing optimizations in the AOP framework. Dynamic
  * target sources can support pooling, hot swapping, etc.
  *
@@ -43,9 +43,9 @@ public interface TargetSource extends TargetClassAware {
 	Class<?> getTargetClass();
 
 	/**
-	 * Will all calls to {@link #getTarget()} return the same object?
-	 * <p>In that case, there will be no need to invoke
-	 * {@link #releaseTarget(Object)}, and the AOP framework can cache
+	 * Will all calls to {@link #getTarget()} return the same object?          getTarget是否会返回同一个对象
+	 * <p>In that case, there will be no need to invoke                        如果是的话，则没有必要调用releaseTarget
+	 * {@link #releaseTarget(Object)}, and the AOP framework can cache         AOP框架会cache getTarget的返回值
 	 * the return value of {@link #getTarget()}.
 	 * @return {@code true} if the target is immutable
 	 * @see #getTarget
@@ -53,8 +53,8 @@ public interface TargetSource extends TargetClassAware {
 	boolean isStatic();
 
 	/**
-	 * Return a target instance. Invoked immediately before the
-	 * AOP framework calls the "target" of an AOP method invocation.
+	 * Return a target instance. Invoked immediately before the                  返回一个目标实例
+	 * AOP framework calls the "target" of an AOP method invocation.             在aop框架 调用目标的 AOP调用 之前被调用
 	 * @return the target object, which contains the joinpoint
 	 * @throws Exception if the target object can't be resolved
 	 */
