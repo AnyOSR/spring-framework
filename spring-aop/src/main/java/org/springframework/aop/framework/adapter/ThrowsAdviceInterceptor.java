@@ -74,8 +74,10 @@ public class ThrowsAdviceInterceptor implements MethodInterceptor, AfterAdvice {
 		Assert.notNull(throwsAdvice, "Advice must not be null");
 		this.throwsAdvice = throwsAdvice;
 
+		// 构造有效参数
 		Method[] methods = throwsAdvice.getClass().getMethods();
 		for (Method method : methods) {
+			// 方法名 入参长度 方法最后一个参数的类型
 			if (method.getName().equals(AFTER_THROWING) &&
 					(method.getParameterTypes().length == 1 || method.getParameterTypes().length == 4) &&
 					Throwable.class.isAssignableFrom(method.getParameterTypes()[method.getParameterTypes().length - 1])
@@ -109,6 +111,8 @@ public class ThrowsAdviceInterceptor implements MethodInterceptor, AfterAdvice {
 			logger.trace("Trying to find handler for exception of type [" + exceptionClass.getName() + "]");
 		}
 		Method handler = this.exceptionHandlerMap.get(exceptionClass);
+
+		//找不到则找基类对应的handler(Method)
 		while (handler == null && exceptionClass != Throwable.class) {
 			exceptionClass = exceptionClass.getSuperclass();
 			handler = this.exceptionHandlerMap.get(exceptionClass);
@@ -123,7 +127,7 @@ public class ThrowsAdviceInterceptor implements MethodInterceptor, AfterAdvice {
 	public Object invoke(MethodInvocation mi) throws Throwable {
 		try {
 			return mi.proceed();
-		}
+		} // 如果调用过程中发生异常
 		catch (Throwable ex) {
 			Method handlerMethod = getExceptionHandler(ex);
 			if (handlerMethod != null) {
@@ -133,6 +137,8 @@ public class ThrowsAdviceInterceptor implements MethodInterceptor, AfterAdvice {
 		}
 	}
 
+	// mi包含了方法名，参数 target等信息
+	// method 处理方法
 	private void invokeHandlerMethod(MethodInvocation mi, Throwable ex, Method method) throws Throwable {
 		Object[] handlerArgs;
 		if (method.getParameterTypes().length == 1) {
