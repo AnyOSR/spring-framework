@@ -34,12 +34,12 @@ package org.springframework.aop;
  * The first three arguments are optional, and only useful if we want further
  * information about the joinpoint, as in AspectJ <b>after-throwing</b> advice.
  *
- * <p><b>Note:</b> If a throws-advice method throws an exception itself, it will
- * override the original exception (i.e. change the exception thrown to the user).
+ * <p><b>Note:</b> If a throws-advice method throws an exception itself, it will              如果一个throws-advice方法本身抛出了一个错误
+ * override the original exception (i.e. change the exception thrown to the user).             那么他会覆盖原来的异常(即会改变抛给用户的异常)
  * The overriding exception will typically be a RuntimeException; this is compatible
  * with any method signature. However, if a throws-advice method throws a checked
  * exception, it will have to match the declared exceptions of the target method
- * and is hence to some degree coupled to specific target method signatures.
+ * and is hence to some degree coupled to specific target method signatures.         某种程度上 和原方法耦合 (原方法异常声明)
  * <b>Do not throw an undeclared checked exception that is incompatible with
  * the target method's signature!</b>
  *
