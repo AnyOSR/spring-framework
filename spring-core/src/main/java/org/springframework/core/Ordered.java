@@ -57,10 +57,10 @@ public interface Ordered {
 
 	/**
 	 * Get the order value of this object.
-	 * <p>Higher values are interpreted as lower priority. As a consequence,
-	 * the object with the lowest value has the highest priority (somewhat
+	 * <p>Higher values are interpreted as lower priority. As a consequence,      更高的值 意味着更低的优先性
+	 * the object with the lowest value has the highest priority (somewhat        因此，最小值拥有最大优先级
 	 * analogous to Servlet {@code load-on-startup} values).
-	 * <p>Same order values will result in arbitrary sort positions for the
+	 * <p>Same order values will result in arbitrary sort positions for the      同样的值 会导致任意的排序位置
 	 * affected objects.
 	 * @return the order value
 	 * @see #HIGHEST_PRECEDENCE
