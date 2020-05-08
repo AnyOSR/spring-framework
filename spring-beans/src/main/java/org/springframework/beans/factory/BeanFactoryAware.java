@@ -41,9 +41,9 @@ import org.springframework.beans.BeansException;
 public interface BeanFactoryAware extends Aware {
 
 	/**
-	 * Callback that supplies the owning factory to a bean instance.
-	 * <p>Invoked after the population of normal bean properties
-	 * but before an initialization callback such as
+	 * Callback that supplies the owning factory to a bean instance.         提供给bean实例所拥有的factory的 回调
+	 * <p>Invoked after the population of normal bean properties              在正常的bean 属性被注入后被调用
+	 * but before an initialization callback such as                           但是在 初始化回调(比如afterPropertiesSet或者定制的init-method)之前被调用
 	 * {@link InitializingBean#afterPropertiesSet()} or a custom init-method.
 	 * @param beanFactory owning BeanFactory (never {@code null}).
 	 * The bean can immediately call methods on the factory.
