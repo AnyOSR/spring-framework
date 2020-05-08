@@ -93,8 +93,8 @@ public interface Advised extends TargetClassAware {
 	boolean isExposeProxy();
 
 	/**
-	 * Set whether this proxy configuration is pre-filtered so that it only
-	 * contains applicable advisors (matching this proxy's target class).
+	 * Set whether this proxy configuration is pre-filtered so that it only     设定 这个代理配置是否是pre-filtered
+	 * contains applicable advisors (matching this proxy's target class).       于是 只会包含可用的advisors(和代理的 目标class匹配)
 	 * <p>Default is "false". Set this to "true" if the advisors have been
 	 * pre-filtered already, meaning that the ClassFilter check can be skipped
 	 * when building the actual advisor chain for proxy invocations.
