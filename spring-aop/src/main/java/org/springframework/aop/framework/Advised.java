@@ -23,7 +23,7 @@ import org.springframework.aop.TargetClassAware;
 import org.springframework.aop.TargetSource;
 
 /**
- * Interface to be implemented by classes that hold the configuration
+ * Interface to be implemented by classes that hold the configuration    AOP FACTORY 代理配置
  * of a factory of AOP proxies. This configuration includes the
  * Interceptors and other advice, Advisors, and the proxied interfaces.
  *
