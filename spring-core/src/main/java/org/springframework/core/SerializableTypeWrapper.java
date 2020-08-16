@@ -151,6 +151,8 @@ abstract class SerializableTypeWrapper {
 	 */
 	// 返回一个实现了Serializable Type SerializableTypeProxy接口的动态代理类实例
 	// 返回类型是Type
+	// 动态代理类的provider只可能是 FieldTypeProvider MethodParameterTypeProvider MethodInvokeTypeProvider  typeProvider可以嵌套
+	// 不可能有 多个动态代理对象的嵌套
 	static Type forTypeProvider(final TypeProvider provider) {
 		Assert.notNull(provider, "Provider must not be null");
 
@@ -351,7 +353,7 @@ abstract class SerializableTypeWrapper {
 			this.methodParameter = methodParameter;
 		}
 
-
+		// 返回参数类型
 		@Override
 		public Type getType() {
 			return this.methodParameter.getGenericParameterType();
