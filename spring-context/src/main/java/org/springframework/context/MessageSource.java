@@ -19,13 +19,13 @@ package org.springframework.context;
 import java.util.Locale;
 
 /**
- * Strategy interface for resolving messages, with support for the parameterization
- * and internationalization of such messages.
+ * Strategy interface for resolving messages, with support for the parameterization     解析消息的策略化接口
+ * and internationalization of such messages.                                           支持参数化，国际化消息
  *
- * <p>Spring provides two out-of-the-box implementations for production:
+ * <p>Spring provides two out-of-the-box implementations for production:                两个开箱即用的production
  * <ul>
- * <li>{@link org.springframework.context.support.ResourceBundleMessageSource},
- * built on top of the standard {@link java.util.ResourceBundle}
+ * <li>{@link org.springframework.context.support.ResourceBundleMessageSource},         ResourceBundleMessageSource
+ * built on top of the standard {@link java.util.ResourceBundle}                        ReloadableResourceBundleMessageSource
  * <li>{@link org.springframework.context.support.ReloadableResourceBundleMessageSource},
  * being able to reload message definitions without restarting the VM
  * </ul>

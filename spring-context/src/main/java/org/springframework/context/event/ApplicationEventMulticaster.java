@@ -21,8 +21,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.ResolvableType;
 
 /**
- * Interface to be implemented by objects that can manage a number of
- * {@link ApplicationListener} objects, and publish events to them.
+ * Interface to be implemented by objects that can manage a number of          能管理许多ApplicationListener 的实例
+ * {@link ApplicationListener} objects, and publish events to them.            能对这些listener发布事件 的接口
  *
  * <p>An {@link org.springframework.context.ApplicationEventPublisher}, typically
  * a Spring {@link org.springframework.context.ApplicationContext}, can use an
