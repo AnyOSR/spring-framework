@@ -17,7 +17,7 @@
 package org.springframework.core.env;
 
 /**
- * Holder containing one or more {@link PropertySource} objects.
+ * Holder containing one or more {@link PropertySource} objects.   一个装着一个或者多个PropertySource 的实例
  *
  * @author Chris Beams
  * @since 3.1
