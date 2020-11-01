@@ -83,27 +83,27 @@ import org.springframework.util.ReflectionUtils;
 /**
  * Abstract implementation of the {@link org.springframework.context.ApplicationContext}
  * interface. Doesn't mandate the type of storage used for configuration; simply
- * implements common context functionality. Uses the Template Method design pattern,
- * requiring concrete subclasses to implement abstract methods.
+ * implements common context functionality. Uses the Template Method design pattern,    只是实现了一个常用的上下文功能
+ * requiring concrete subclasses to implement abstract methods.                         使用末班方法设计模式，需要具体的实现子类
  *
- * <p>In contrast to a plain BeanFactory, an ApplicationContext is supposed
- * to detect special beans defined in its internal bean factory:
- * Therefore, this class automatically registers
- * {@link org.springframework.beans.factory.config.BeanFactoryPostProcessor BeanFactoryPostProcessors},
- * {@link org.springframework.beans.factory.config.BeanPostProcessor BeanPostProcessors}
- * and {@link org.springframework.context.ApplicationListener ApplicationListeners}
- * which are defined as beans in the context.
+ * <p>In contrast to a plain BeanFactory, an ApplicationContext is supposed              和BeanFactory不一样，ApplicationContext在设计上
+ * to detect special beans defined in its internal bean factory:                         能检测其内部的特殊bean的
+ * Therefore, this class automatically registers                                         因此，自动注册了
+ * {@link org.springframework.beans.factory.config.BeanFactoryPostProcessor BeanFactoryPostProcessors},   BeanFactoryPostProcessor
+ * {@link org.springframework.beans.factory.config.BeanPostProcessor BeanPostProcessors}                  BeanPostProcessor
+ * and {@link org.springframework.context.ApplicationListener ApplicationListeners}                       ApplicationListener
+ * which are defined as beans in the context.                                              ，在其内部环境作为一个bean被定义
  *
- * <p>A {@link org.springframework.context.MessageSource} may also be supplied
- * as a bean in the context, with the name "messageSource"; otherwise, message
+ * <p>A {@link org.springframework.context.MessageSource} may also be supplied         MessageSource在上下文中也被作为一个bean提供，其名称是"messageSource"
+ * as a bean in the context, with the name "messageSource"; otherwise, message         此外，message解析被代理给父容器
  * resolution is delegated to the parent context. Furthermore, a multicaster
- * for application events can be supplied as "applicationEventMulticaster" bean
+ * for application events can be supplied as "applicationEventMulticaster" bean        applicationEventMulticaster(处理application event)
  * of type {@link org.springframework.context.event.ApplicationEventMulticaster}
  * in the context; otherwise, a default multicaster of type
  * {@link org.springframework.context.event.SimpleApplicationEventMulticaster} will be used.
  *
  * <p>Implements resource loading through extending
- * {@link org.springframework.core.io.DefaultResourceLoader}.
+ * {@link org.springframework.core.io.DefaultResourceLoader}.                         DefaultResourceLoader 资源加载
  * Consequently treats non-URL resource paths as class path resources
  * (supporting full class path resource names that include the package path,
  * e.g. "mypackage/myresource.dat"), unless the {@link #getResourceByPath}
